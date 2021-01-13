@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.1</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.gac</groupId>
 	<artifactId>backend</artifactId>
@@ -16,6 +17,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<openapi.generator.version>5.0.0</openapi.generator.version>
 	</properties>
 
 	<dependencies>
@@ -29,13 +31,139 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.3.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    <version>3.0.0</version>
+</dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>openapi-generator-maven-plugin</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>4.9.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.gsonfire</groupId>
+			<artifactId>gson-fire</artifactId>
+			<version>1.8.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>${openapi.generator.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/openapi/swagger.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<apiPackage>${project.groupId}.api.layer.v1</apiPackage>
+							<invokerPackage>${project.groupId}.api.layer.v1.invoker</invokerPackage>
+							<modelPackage>${project.groupId}.api.modele.dto.v1</modelPackage>
+							<output>${project.build.directory}/generated-sources/openapi</output>
+							<generateModelTests>false</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateApiTests>false</generateApiTests>
+							<generateApiDocumentation>false</generateApiDocumentation>
+							<generateSupportingFiles>true</generateSupportingFiles>
+							<generateAliasAsModel>true</generateAliasAsModel>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<configOptions>
+								<dateLibrary>java8</dateLibrary>
+								<interfaceOnly>true</interfaceOnly>
+								<java8>true</java8>
+								<useOptional>false</useOptional>
+								<booleanGetterPrefix>is</booleanGetterPrefix>
+								<skipDefaultInterface>false</skipDefaultInterface>
+								<additionalModelTypeAnnotations>@com.fasterxml.jackson.annotation.JsonInclude(com.fasterxml.jackson.annotation.JsonInclude.Include.ALWAYS)
+								</additionalModelTypeAnnotations>
+							</configOptions>
+						</configuration>
+					</execution>
+
+					<!-- <execution> <goals> <goal>generate</goal> </goals> <id>generate-client-dla</id> 
+						<configuration> <inputSpec>${project.basedir}/src/main/resources/openapi/swagger.yaml</inputSpec> 
+						<generatorName>java</generatorName> <apiPackage>${project.groupId}.api.layer.client.dla.v1</apiPackage> 
+						<invokerPackage>${project.groupId}.api.layer.v1.invoker</invokerPackage> 
+						<output>${project.build.directory}/generated-sources/openapi</output> <generateModelTests>false</generateModelTests> 
+						<generateModelDocumentation>false</generateModelDocumentation> <generateApiTests>false</generateApiTests> 
+						<generateApiDocumentation>false</generateApiDocumentation> <generateSupportingFiles>true</generateSupportingFiles> 
+						<generateAliasAsModel>true</generateAliasAsModel> <groupId>gec</groupId> 
+						<artifactId>gec</artifactId> <artifactVersion>1.0.0</artifactVersion> </configuration> 
+						</execution> -->
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/openapi/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
