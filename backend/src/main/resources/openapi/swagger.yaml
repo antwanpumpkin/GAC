@@ -34,6 +34,11 @@ paths:
         schema:
           $ref: "#/definitions/Voiture"
       responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: "car added"
         "405":
           description: "Invalid input"
     put:
@@ -56,6 +61,11 @@ paths:
         schema:
           $ref: "#/definitions/Voiture"
       responses:
+        "200":
+          description: "successful operation"
+          schema:
+           type: string
+           example: "car updated"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -103,6 +113,11 @@ paths:
         type: "integer"
         format: "int64"
       responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: "OK"
         "400":
           description: "Invalid ID supplied"
         "404":
