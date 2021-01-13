@@ -8,9 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-        "com.gac.configuration",
-        "com.gac.api.impl",
-        "com.gac.metier.impl"
+        "com.gac.configuration"
 })
 public class GacBackendApplication extends SpringBootServletInitializer {
 

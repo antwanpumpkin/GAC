@@ -18,13 +18,6 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 @RestController
 public class VoitureApiImpl implements VoitureApi {
 
-	public VoitureApiImpl(VoitureMetier voitureMetier) {
-		super();
-		System.out.println("test");
-		this.voitureMetier = voitureMetier;
-		System.out.println("test");
-	}
-
 	@Autowired
 	VoitureMetier voitureMetier;
 	

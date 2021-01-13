@@ -19,7 +19,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {
-                "com.gac.configuration",
                 "com.gac.api.impl",
                 "com.gac.metier.impl"// classes métiers
 })
