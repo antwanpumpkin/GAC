@@ -30,7 +30,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -49,14 +49,18 @@
 			<artifactId>spring-data-commons</artifactId>
 			<version>2.4.2</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-webmvc</artifactId>
-    <version>5.3.3</version>
-</dependency>
-		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.3.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -107,6 +111,24 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.4.1.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -146,17 +168,6 @@
 							</configOptions>
 						</configuration>
 					</execution>
-
-					<!-- <execution> <goals> <goal>generate</goal> </goals> <id>generate-client-dla</id> 
-						<configuration> <inputSpec>${project.basedir}/src/main/resources/openapi/swagger.yaml</inputSpec> 
-						<generatorName>java</generatorName> <apiPackage>${project.groupId}.api.layer.client.dla.v1</apiPackage> 
-						<invokerPackage>${project.groupId}.api.layer.v1.invoker</invokerPackage> 
-						<output>${project.build.directory}/generated-sources/openapi</output> <generateModelTests>false</generateModelTests> 
-						<generateModelDocumentation>false</generateModelDocumentation> <generateApiTests>false</generateApiTests> 
-						<generateApiDocumentation>false</generateApiDocumentation> <generateSupportingFiles>true</generateSupportingFiles> 
-						<generateAliasAsModel>true</generateAliasAsModel> <groupId>gec</groupId> 
-						<artifactId>gec</artifactId> <artifactVersion>1.0.0</artifactVersion> </configuration> 
-						</execution> -->
 				</executions>
 			</plugin>
 
@@ -177,6 +188,22 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>1.4.1.Final</version>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

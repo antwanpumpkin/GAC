@@ -4,6 +4,7 @@ package com.gac.configuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 //import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * Classe de configuration Spring du module core
@@ -20,10 +22,12 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {
                 "com.gac.api.impl",
-                "com.gac.metier.impl"// classes métiers
+                "com.gac.metier.impl",
+                "com.gac.core.mappeur"
 })
 //@PropertySource("classpath:technical.properties") // chargement des propriétés techniques/
-//@EnableJpaRepositories(basePackages = {"fr.acoss.dla.core.layer.dao", "fr.acoss.dla.core.modele.persistence"})
+@EntityScan(basePackages = {"com.gac.modele.persistance"})
+@EnableJpaRepositories(basePackages = {"com.gac.layer.dao"})
 public class CoreConfiguration {
   /**
    * Logger
