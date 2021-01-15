@@ -1,0 +1,137 @@
+swagger: "2.0"
+info:
+  description: "Gestion des automobiles de collection"
+  version: "1.0.0"
+  title: "Gestion des automobiles de collection"
+  contact:
+    email: "apiteam@swagger.io"
+basePath: "/v1"
+tags:
+- name: "voiture"
+  description: "gestion des voiture"
+- name: "pieces"
+  description: "Recherche de pièces"
+schemes:
+- "https"
+- "http"
+paths:
+  /voiture:
+    post:
+      tags:
+      - "voiture"
+      summary: "Ajout d'une nouvelle voiture"
+      description: ""
+      operationId: "addCar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Car object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Voiture"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: "car added"
+        "405":
+          description: "Invalid input"
+  /voiture/{carId}:
+    get:
+      tags:
+      - "voiture"
+      summary: "Trouver une voiture par ID"
+      description: "Returns a single car"
+      operationId: "getCarById"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Voiture"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+    patch:
+      tags:
+      - "voiture"
+      summary: "Modifier une voiture existante"
+      description: ""
+      operationId: "updateCar"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: body
+        name: params
+        required: true
+        schema:
+          $ref: "#/definitions/Voiture"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+           type: string
+           example: "car updated"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+        "405":
+          description: "Validation exception"
+    delete:
+      tags:
+      - "voiture"
+      summary: "Supprimer une voiture"
+      description: ""
+      operationId: "deleteCar"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: "OK"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+    parameters:
+      - name: "carId"
+        in: "path"
+        description: "Car id"
+        required: true
+        type: "string"
+        format: "uuid"
+definitions:
+  Voiture:
+    type: "object"
+    properties:
+      marque:
+        type: "string"
+        example: "Peugeot"
+      modele:
+        type: "string"
+        example: "205 GTI"
+      premiereImmat:
+        type: "string"
+        format: "date"
+        example: "10-10-1991"
+      puissanceFiscale:
+        type: "integer"
+        example: "8"
+      prixDachat:
+        type: "integer"
+        example: "10000"
+      prixVenteEstimee:
+        type: "integer"
+        example: "15000"
