@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
     providedIn: 'root',
 })
@@ -20,6 +22,7 @@ export class HttpServiceInterceptor implements HttpInterceptor {
         const header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
         return next.handle(
             req.clone({
+                url: environment.urlBe + req.url,
                 headers: header
             }))
             .pipe(
