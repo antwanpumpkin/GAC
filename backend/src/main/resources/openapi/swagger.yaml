@@ -5,7 +5,9 @@ info:
   title: "Gestion des automobiles de collection"
   contact:
     email: "apiteam@swagger.io"
-basePath: "/v1"
+basePath: "/api"
+produces:
+  - application/json
 tags:
 - name: "voiture"
   description: "gestion des voiture"
