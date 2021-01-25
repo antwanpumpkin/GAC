@@ -14,6 +14,11 @@ const APP_ROUTES: Routes = [
         data: { title: 'Accueil - GAC' }
       },
       {
+        path: 'gestion',
+        loadChildren: () => import('./gestion/gestion.module').then(m => m.GestionModule),
+        data: { title: 'Gestion - GAC' }
+      },
+      {
         path: '',
         redirectTo: 'accueil',
         pathMatch: 'full'

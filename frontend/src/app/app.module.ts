@@ -4,11 +4,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HttpServiceInterceptor } from './shared/interceptors/http-service-interceptor';
-import { AccueilInterfaceComponent } from './accueil/container/accueil-interface/accueil-interface.component';
-import { MainComponent } from './accueil/components/main/main/main.component';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AccueilModule } from './accueil/accueil.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,8 @@ import { AccueilModule } from './accueil/accueil.module';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    AccueilModule
+    AccueilModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
