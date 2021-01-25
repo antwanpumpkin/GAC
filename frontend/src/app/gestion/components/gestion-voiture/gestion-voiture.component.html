@@ -1,72 +1,113 @@
+<form class="example-form">
 
- 
-  <div class="content" role="main">
-  
+  <mat-form-field appearance="fill">
+    <mat-label>Marque</mat-label>
+    <mat-select (selectionChange)="updateSelection($event)">
+      <mat-option *ngFor="let item of carList" [value]="item.brand">
+        {{item.brand}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <input type="hidden" #selection>
-  
-    <div class="card-container">
-      <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M22 13V15H18.32C18.75 14.09 19 13.08 19 12C19 8.14 15.86 5 12 5H2V3H12C16.97 3 21 7.03 21 12C21 12.34 20.97 12.67 20.94 13H22M12 19C8.14 19 5 15.86 5 12C5 10.93 5.25 9.91 5.69 9H2V11H3.06C3.03 11.33 3 11.66 3 12C3 16.97 7.03 21 12 21H22V19H12M16.86 12.2C15.93 12.94 14.72 12.47 14 12.05V12C16.79 10.31 15.39 7.89 15.39 7.89S14.33 6.04 14.61 7.89C14.78 9.07 13.76 9.88 13.04 10.3L13 10.28C12.93 7 10.13 7 10.13 7S8 7 9.74 7.69C10.85 8.13 11.04 9.42 11.05 10.25L11 10.28C8.14 8.7 6.74 11.12 6.74 11.12S5.67 12.97 7.14 11.8C8.07 11.07 9.28 11.54 10 11.95V12C7.21 13.7 8.61 16.12 8.61 16.12S9.67 17.97 9.4 16.11C9.22 14.94 10.25 14.13 10.97 13.7L11 13.73C11.07 17 13.87 17 13.87 17S16 17 14.26 16.31C13.15 15.87 12.96 14.58 12.95 13.75L13 13.73C15.86 15.31 17.26 12.88 17.26 12.88S18.33 11.04 16.86 12.2Z" />
-      </svg>
-  
-        <span>Moteur</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="currentColor"
-            d="M4,3V6H1V20H23V6H20V3H14V6H10V3H4M3,8H21V18H3V8M15,10V12H13V14H15V16H17V14H19V12H17V10H15M5,12V14H11V12H5Z" />
-        </svg>
-        <span>Batterie</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M8 5H4V2H8V5M4 22H8V19H4V22M14 2H10V5H14V2M10 22H14V19H10V22M16 2V5H20V2H16M17 11H13V7H11V11H7V7H5V17H7V13H11V17H13V13H19V7H17V11Z" />
-        </svg>
-  
-        <span>Boite de vitesse</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'pwa'" tabindex="0">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M24,12C24,15.31 22.66,18.31 20.5,20.5L19.42,19.42C21.32,17.5 22.5,14.9 22.5,12C22.5,9.11 21.32,6.5 19.42,4.58L20.5,3.5C22.66,5.69 24,8.69 24,12M20,9.6V8H16.8C15.92,8 15.2,8.72 15.2,9.6V11.2A1.6,1.6 0 0,0 16.8,12.8H18.4V14.4H15.2V16H18.4C19.28,16 20,15.28 20,14.4V12.8A1.6,1.6 0 0,0 18.4,11.2H16.8V9.6H20M8.42,6C9.47,5.37 10.69,5 12,5C13.31,5 14.53,5.37 15.58,6H18.69C17.05,4.16 14.66,3 12,3C9.34,3 6.95,4.16 5.31,6H8.42M13.2,12C13.84,12 14.4,12.56 14.4,13.2V14.4A1.6,1.6 0 0,1 12.8,16H9.6V8H12.8A1.6,1.6 0 0,1 14.4,9.6V10.8C14.4,11.44 13.84,12 13.2,12M12.8,12.8H11.2V14.4H12.8V12.8M12.8,9.6H11.2V11.2H12.8V9.6M4.58,4.58L3.5,3.5C1.34,5.69 0,8.69 0,12C0,15.31 1.34,18.31 3.5,20.5L4.58,19.42C2.68,17.5 1.5,14.9 1.5,12C1.5,9.11 2.68,6.5 4.58,4.58M7.2,16V12.8H5.6V16H4V9.6A1.6,1.6 0 0,1 5.6,8H7.2C8.08,8 8.8,8.72 8.8,9.6V16H7.2M7.2,11.2V9.6H5.6V11.2H7.2M15.58,18C14.53,18.63 13.31,19 12,19C10.69,19 9.47,18.63 8.42,18H5.31C6.95,19.84 9.34,21 12,21C14.66,21 17.05,19.84 18.69,18H15.58Z" />
-      </svg>
-  
-        <span>Freinage</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        </svg>
-  
-        <span>Add Dependency</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        </svg>
-  
-        <span>Run and Watch Tests</span>
-      </div>
-  
-      <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        </svg>
-  
-        <span>Build for Production</span>
-      </div>
-  
-   <!--   <ul *ngFor="let item of carList">
+  <mat-form-field appearance="fill" *ngIf="modeleList != null">
+    <mat-label>Modèle</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let item of modeleList.models" [value]="item">
+        {{item}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Première immatriculation</mat-label>
+    <input matInput placeholder="10-10-2020">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Puissance fiscale</mat-label>
+    <input matInput placeholder="5">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Prix d'achat</mat-label>
+    <input matInput placeholder="10000">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Prix vente estimée</mat-label>
+    <input matInput placeholder="15000">
+  </mat-form-field>
+
+
+</form>
+<button mat-raised-button (click)="enregistrer()" color="primary">Envoyer</button>
+
+<button mat-raised-button (click)="getCar()" color="primary">Récupérer voiture</button>
+
+<div class="card-container">
+  <div class="card card-small" tabindex="0">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M22 13V15H18.32C18.75 14.09 19 13.08 19 12C19 8.14 15.86 5 12 5H2V3H12C16.97 3 21 7.03 21 12C21 12.34 20.97 12.67 20.94 13H22M12 19C8.14 19 5 15.86 5 12C5 10.93 5.25 9.91 5.69 9H2V11H3.06C3.03 11.33 3 11.66 3 12C3 16.97 7.03 21 12 21H22V19H12M16.86 12.2C15.93 12.94 14.72 12.47 14 12.05V12C16.79 10.31 15.39 7.89 15.39 7.89S14.33 6.04 14.61 7.89C14.78 9.07 13.76 9.88 13.04 10.3L13 10.28C12.93 7 10.13 7 10.13 7S8 7 9.74 7.69C10.85 8.13 11.04 9.42 11.05 10.25L11 10.28C8.14 8.7 6.74 11.12 6.74 11.12S5.67 12.97 7.14 11.8C8.07 11.07 9.28 11.54 10 11.95V12C7.21 13.7 8.61 16.12 8.61 16.12S9.67 17.97 9.4 16.11C9.22 14.94 10.25 14.13 10.97 13.7L11 13.73C11.07 17 13.87 17 13.87 17S16 17 14.26 16.31C13.15 15.87 12.96 14.58 12.95 13.75L13 13.73C15.86 15.31 17.26 12.88 17.26 12.88S18.33 11.04 16.86 12.2Z" />
+    </svg>
+
+    <span>Moteur</span>
+  </div>
+
+  <div class="card card-small"  tabindex="0">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M4,3V6H1V20H23V6H20V3H14V6H10V3H4M3,8H21V18H3V8M15,10V12H13V14H15V16H17V14H19V12H17V10H15M5,12V14H11V12H5Z" />
+    </svg>
+    <span>Batterie</span>
+  </div>
+
+  <div class="card card-small" tabindex="0">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M8 5H4V2H8V5M4 22H8V19H4V22M14 2H10V5H14V2M10 22H14V19H10V22M16 2V5H20V2H16M17 11H13V7H11V11H7V7H5V17H7V13H11V17H13V13H19V7H17V11Z" />
+    </svg>
+
+    <span>Boite de vitesse</span>
+  </div>
+
+  <div class="card card-small"  tabindex="0">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="currentColor"
+        d="M24,12C24,15.31 22.66,18.31 20.5,20.5L19.42,19.42C21.32,17.5 22.5,14.9 22.5,12C22.5,9.11 21.32,6.5 19.42,4.58L20.5,3.5C22.66,5.69 24,8.69 24,12M20,9.6V8H16.8C15.92,8 15.2,8.72 15.2,9.6V11.2A1.6,1.6 0 0,0 16.8,12.8H18.4V14.4H15.2V16H18.4C19.28,16 20,15.28 20,14.4V12.8A1.6,1.6 0 0,0 18.4,11.2H16.8V9.6H20M8.42,6C9.47,5.37 10.69,5 12,5C13.31,5 14.53,5.37 15.58,6H18.69C17.05,4.16 14.66,3 12,3C9.34,3 6.95,4.16 5.31,6H8.42M13.2,12C13.84,12 14.4,12.56 14.4,13.2V14.4A1.6,1.6 0 0,1 12.8,16H9.6V8H12.8A1.6,1.6 0 0,1 14.4,9.6V10.8C14.4,11.44 13.84,12 13.2,12M12.8,12.8H11.2V14.4H12.8V12.8M12.8,9.6H11.2V11.2H12.8V9.6M4.58,4.58L3.5,3.5C1.34,5.69 0,8.69 0,12C0,15.31 1.34,18.31 3.5,20.5L4.58,19.42C2.68,17.5 1.5,14.9 1.5,12C1.5,9.11 2.68,6.5 4.58,4.58M7.2,16V12.8H5.6V16H4V9.6A1.6,1.6 0 0,1 5.6,8H7.2C8.08,8 8.8,8.72 8.8,9.6V16H7.2M7.2,11.2V9.6H5.6V11.2H7.2M15.58,18C14.53,18.63 13.31,19 12,19C10.69,19 9.47,18.63 8.42,18H5.31C6.95,19.84 9.34,21 12,21C14.66,21 17.05,19.84 18.69,18H15.58Z" />
+    </svg>
+
+    <span>Freinage</span>
+  </div>
+
+  <div class="card card-small" tabindex="0">
+    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </svg>
+
+    <span>Add Dependency</span>
+  </div>
+
+  <div class="card card-small" tabindex="0">
+    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </svg>
+
+    <span>Run and Watch Tests</span>
+  </div>
+
+  <div class="card card-small"  tabindex="0">
+    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </svg>
+
+    <span>Build for Production</span>
+  </div>
+
+  <!--   <ul *ngFor="let item of carList">
         <li>
            <p>Marque :{{item.brand}}, Modèle: {{item.models}}</p>
         </li>
      </ul>-->
-    </div>
-  
-  </div>
+</div>
