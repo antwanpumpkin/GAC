@@ -11,13 +11,14 @@ import * as car from 'src/assets/carlist.json';
 })
 export class AppComponent {
   title = 'Gestion d\'automobile de collection';
-  public carList:{brand:string, models:string[]}[] = car;
+  //public carList:{brand:string, models:string[]}[] = car;
+  carList: any;
 
   constructor(private voitureService: VoitureService) {
   }
 
   ngOnInit() {
-    console.log(this.carList)
+    this.carList = JSON.stringify(car);
   }
 
   getCar() {
