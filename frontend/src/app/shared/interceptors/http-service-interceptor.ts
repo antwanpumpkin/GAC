@@ -18,22 +18,32 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log(req);
-        const header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
-        return next.handle(
-            req.clone({
-                url: environment.urlBe + req.url,
-                headers: header
-            }))
-            .pipe(
-                catchError((error: HttpErrorResponse) => {
-                    this.handleAuthError(error);
-                    return throwError;
-                }));
+        if (req.url != "assets/carlist.json") {
+            console.log(req);
+            const header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+            return next.handle(
+                req.clone({
+                    url: environment.urlBe + req.url,
+                    headers: header
+                }))
+                .pipe(
+                    catchError((error: HttpErrorResponse) => {
+                        this.handleAuthError(error);
+                        return throwError;
+                    }));
+        }
+        else {
+            return next.handle(req)
+                .pipe(
+                    catchError((error: HttpErrorResponse) => {
+                        this.handleAuthError(error);
+                        return throwError;
+                    }));
+        }
     }
 
-    private handleAuthError(err: HttpErrorResponse): Observable<any> {
-        console.log(err);
-        throw err;
-    }
+    private handleAuthError(err: HttpErrorResponse): Observable < any > {
+    console.log(err);
+    throw err;
+}
 }
