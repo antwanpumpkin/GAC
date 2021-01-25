@@ -40,7 +40,8 @@ paths:
           description: "successful operation"
           schema:
             type: string
-            example: "car added"
+            format: uuid
+            example: "40bad878-badf-4601-a729-e0dea0c7cc16"
         "405":
           description: "Invalid input"
   /voiture/{carId}:
@@ -81,8 +82,7 @@ paths:
         "200":
           description: "successful operation"
           schema:
-           type: string
-           example: "car updated"
+            $ref: "#/definitions/Voiture"
         "400":
           description: "Invalid ID supplied"
         "404":

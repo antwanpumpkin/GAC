@@ -22,11 +22,11 @@ public class VoitureMetierImpl implements VoitureMetier {
 	VoitureMappeur voitureMappeur;
 	
 	@Override
-	public String addCar(VoitureDTO car) {
+	public UUID addCar(VoitureDTO car) {
 		Voiture voitureToSave = voitureMappeur.sourceToDestination(car);
 		Voiture voitureSaved = voitureDao.save(voitureToSave);
 		System.out.println(voitureSaved.getId());
-		return "car added with id: " + voitureSaved.getId();
+		return voitureSaved.getId();
 	}
 
 	@Override
@@ -41,8 +41,9 @@ public class VoitureMetierImpl implements VoitureMetier {
 	}
 
 	@Override
-	public String updateCar(UUID carId, VoitureDTO car) {
+	public VoitureDTO updateCar(UUID carId, VoitureDTO car) {
 		Optional<Voiture> voiture = voitureDao.findById(carId);
+		Voiture voitureUpdated = new Voiture();
 		
 		if (voiture.isPresent()) {
 			Voiture voitureMapped = voitureMappeur.sourceToDestination(car);
@@ -53,10 +54,10 @@ public class VoitureMetierImpl implements VoitureMetier {
 			voiture.get().setPrixDachat(voitureMapped.getPrixDachat());
 			voiture.get().setPrixVenteEstimee(voitureMapped.getPrixVenteEstimee());
 
-			voitureDao.save(voiture.get());
-			return "car updated";
+			voitureUpdated = voitureDao.save(voiture.get());
+			return voitureMappeur.destinationTosource(voitureUpdated);
 		}	
-		return "no car founded";
+		return null;
 	}
 
 	@Override

@@ -1,8 +1,8 @@
 <form class="example-form">
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" class="marque">
     <mat-label>Marque</mat-label>
-    <mat-select (selectionChange)="updateSelection($event)">
+    <mat-select (selectionChange)="selectionMarque($event)">
       <mat-option *ngFor="let item of carList" [value]="item.brand">
         {{item.brand}}
       </mat-option>
@@ -11,7 +11,7 @@
 
   <mat-form-field appearance="fill" *ngIf="modeleList != null">
     <mat-label>Modèle</mat-label>
-    <mat-select>
+    <mat-select (selectionChange)="selectionModele($event)">
       <mat-option *ngFor="let item of modeleList.models" [value]="item">
         {{item}}
       </mat-option>
@@ -21,29 +21,40 @@
 
   <mat-form-field class="example-full-width">
     <mat-label>Première immatriculation</mat-label>
-    <input matInput placeholder="10-10-2020">
+    <input [(ngModel)]="premiereImmat" name="premiereImmat" matInput placeholder="10-10-2020">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Puissance fiscale</mat-label>
-    <input matInput placeholder="5">
+    <input [(ngModel)]="puissanceFiscale" name="puissanceFiscale" matInput placeholder="5">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Prix d'achat</mat-label>
-    <input matInput placeholder="10000">
+    <input [(ngModel)]="prixAchat" name="prixAchat" matInput placeholder="10000">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Prix vente estimée</mat-label>
-    <input matInput placeholder="15000">
+    <input [(ngModel)]="prixVenteEstimee" name="prixVenteEstimee" matInput placeholder="15000">
   </mat-form-field>
 
 
 </form>
-<button mat-raised-button (click)="enregistrer()" color="primary">Envoyer</button>
+<button mat-raised-button (click)="enregistrer()" color="primary">Enregistrer le véhicule</button>
+<span *ngIf="voitureEnregistree"> Voiture enregistrée avec l'id: {{idRegistered}} </span>
+<br/>
+<br/>
 
-<button mat-raised-button (click)="getCar()" color="primary">Récupérer voiture</button>
+<hr/>
+<button mat-raised-button (click)="getCar()" color="primary">Récupérer la voiture</button>
+<p *ngIf="carGetted != null">{{carGetted.marque}}</p>
+<p *ngIf="carGetted != null">{{carGetted.modele}}</p>
+<hr/>
+
+<button mat-raised-button (click)="deleteCar()" color="warn">Supprimer la voiture</button>
+{{ deleted }}
+<hr/>
 
 <div class="card-container">
   <div class="card card-small" tabindex="0">
