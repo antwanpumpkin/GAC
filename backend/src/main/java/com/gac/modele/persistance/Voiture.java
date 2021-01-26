@@ -35,6 +35,9 @@ public class Voiture {
 
     @Column(name = "prixVenteEstimee")
     private Integer prixVenteEstimee;
+    
+    @Column(name = "userId")
+    private UUID userId;
 
 	public UUID getId() {
 		return id;
@@ -90,5 +93,13 @@ public class Voiture {
 
 	public void setPrixVenteEstimee(Integer prixVenteEstimee) {
 		this.prixVenteEstimee = prixVenteEstimee;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
 	}
 }

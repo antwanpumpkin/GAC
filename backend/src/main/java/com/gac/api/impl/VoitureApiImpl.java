@@ -1,5 +1,6 @@
 package com.gac.api.impl;
 
+import java.util.List;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -56,5 +57,11 @@ public class VoitureApiImpl implements VoitureApi {
 		VoitureDTO result = voitureMetier.updateCar(carId, params);
 		log.info("car updated: " + result);
 		return new ResponseEntity<VoitureDTO>(result, HttpStatus.OK);	
+	}
+
+	@Override
+	public ResponseEntity<List<VoitureDTO>> getCarsByUserId(UUID userId) {
+		log.info("get all cars call for: " + userId);
+		return new ResponseEntity<List<VoitureDTO>>(voitureMetier.getCarsByUserId(userId), HttpStatus.OK);
 	}
 }

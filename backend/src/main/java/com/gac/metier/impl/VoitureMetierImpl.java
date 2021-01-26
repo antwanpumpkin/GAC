@@ -1,11 +1,16 @@
 package com.gac.metier.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gac.api.impl.VoitureApiImpl;
 import com.gac.api.modele.dto.v1.VoitureDTO;
 import com.gac.core.mappeur.VoitureMappeur;
 import com.gac.layer.dao.VoitureDao;
@@ -14,6 +19,8 @@ import com.gac.modele.persistance.Voiture;
 
 @Service
 public class VoitureMetierImpl implements VoitureMetier {
+
+    Logger log = LoggerFactory.getLogger(VoitureMetierImpl.class);
 
 	@Autowired
 	VoitureDao voitureDao;
@@ -66,6 +73,23 @@ public class VoitureMetierImpl implements VoitureMetier {
 		
 		if (voiture.isPresent()) {
 			return voitureMappeur.destinationTosource(voiture.get());
+		}
+		return null;
+	}
+
+	@Override
+	public List<VoitureDTO> getCarsByUserId(UUID userId) {
+		Optional<List<Voiture>> voiture = voitureDao.findByUserId(userId);
+		ArrayList<VoitureDTO> allCars = new ArrayList<VoitureDTO>();
+		
+		if (voiture.isPresent()) {
+			log.info("voiture present");
+			for(Voiture v : voiture.get()) {
+				log.info("voiture: " + v.getMarque());
+
+				allCars.add(voitureMappeur.destinationTosource(v));
+			}
+			return allCars;
 		}
 		return null;
 	}
