@@ -11,3 +11,31 @@
   .marque {
     margin-right: 10px;
   }
+
+  .parent {
+    width:1000px;
+    height:100px;
+    border:1px solid red;
+    margin-right:10px;
+    margin-top:25px;
+    float:left;
+  }
+
+  .left-side {
+    float:left;
+    width: 500px;
+    height: 500px;
+    margin-right:5px;
+  }
+
+  .parent {
+    background-image: url('/assets/brique-background.jpg');
+    height: 100%;
+    max-height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:black;
+    text-align: center;
+  }

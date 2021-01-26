@@ -26,14 +26,14 @@ export class GestionVoitureComponent implements OnInit {
   carGetted : Voiture;
   deleted: string;
 
+  listAllCars: Array<Voiture>;
+
   constructor(private voitureService: VoitureService, private http: HttpClient) {
   }
 
   ngOnInit() {
-    console.log("ini")
     this.http.get(this._jsonURL).subscribe(data =>{
       this.carList = data;
-      console.log(data);
     })
   }
 
@@ -46,11 +46,20 @@ export class GestionVoitureComponent implements OnInit {
     });
   }
 
-  deleteCar() {
-    console.log("delete car");
-    this.voitureService.deleteCar(this.idRegistered).subscribe((response: string) => {
+  getAllCars() {
+    console.log("get all cars");
+    this.voitureService.getCarsByUserId("00000000-0000-0000-0000-000000000001").subscribe((response: Array<Voiture>) => {
+      console.log(response);
+      this.listAllCars = response;
+    });
+  }
+
+  deleteCar(id: any) {
+    console.log("demande suppresion voiture avec id: " + id);
+    this.voitureService.deleteCar(id).subscribe((response: string) => {
       console.log(response);
       this.deleted = response;
+      this.getAllCars();
     });
   }
 
@@ -68,6 +77,7 @@ export class GestionVoitureComponent implements OnInit {
     let date = new Date();
     
     this.voiture = new VoitureImpl();
+    this.voiture.userId = "00000000-0000-0000-0000-000000000001";
     this.voiture.marque = this.brandSelected;
     this.voiture.modele = this.modeleSelected;
     this.voiture.premiereImmat = null//this.premiereImmat;
@@ -80,6 +90,7 @@ export class GestionVoitureComponent implements OnInit {
       this.voitureEnregistree = true;
       this.idRegistered = response.replace(/\"/g,"");
       console.log(this.idRegistered);
+      this.getAllCars();
     }, error => {
       this.voitureEnregistree = false;
       console.log(error);
