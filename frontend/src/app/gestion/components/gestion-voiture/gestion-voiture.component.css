@@ -29,13 +29,12 @@
   }
 
   .parent {
-    background-image: url('/assets/brique-background.jpg');
     height: 100%;
     max-height: 500px;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    color:black;
+    color:white;
     text-align: center;
   }
