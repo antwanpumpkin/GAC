@@ -23,7 +23,6 @@ export class GestionVoitureComponent implements OnInit {
   voiture : VoitureImpl;
   voitureEnregistree = false;
   idRegistered : string;
-  carGetted : Voiture;
   deleted: string;
 
   listAllCars: Array<Voiture>;
@@ -35,14 +34,13 @@ export class GestionVoitureComponent implements OnInit {
     this.http.get(this._jsonURL).subscribe(data =>{
       this.carList = data;
     })
+    this.getAllCars();
   }
 
   getCar() {
     console.log("get car");
     this.voitureService.getCarById(this.idRegistered).subscribe((response: Voiture) => {
       console.log(response);
-      this.carGetted = response;
-      this.carGetted.marque
     });
   }
 
@@ -58,8 +56,10 @@ export class GestionVoitureComponent implements OnInit {
     console.log("demande suppresion voiture avec id: " + id);
     this.voitureService.deleteCar(id).subscribe((response: string) => {
       console.log(response);
-      this.deleted = response;
+      this.deleted = "Voiture supprimée";
       this.getAllCars();
+    }, error => {
+      this.deleted = "Echec de la suppression";
     });
   }
 
@@ -95,6 +95,10 @@ export class GestionVoitureComponent implements OnInit {
       this.voitureEnregistree = false;
       console.log(error);
     })
+  }
+
+  modifier() {
+
   }
 
 

@@ -43,30 +43,26 @@
 
 
     </form>
-    <button mat-raised-button (click)="enregistrer()" color="primary">Enregistrer le véhicule</button>
+    <a class="button primary gestion" (click)="enregistrer()">Enregistrer la voiture</a>
+    
     <span *ngIf="voitureEnregistree"> Voiture enregistrée avec l'id: {{idRegistered}} </span>
-    <br />
-    <br />
 
-    <hr />
-    <button mat-raised-button (click)="getCar()" color="primary">Récupérer la voiture</button>
-    <p *ngIf="carGetted != null">{{carGetted.marque}}</p>
+
+    <p *ngIf="carGetted != null">{{carGetted.marque}} </p>
     <p *ngIf="carGetted != null">{{carGetted.modele}}</p>
-    <hr />
-    <hr />
   </div>
 
   <div class="right-side">
-    <button mat-raised-button (click)="getAllCars()" color="primary">Récupérer mes voitures</button>
-
+    <a class="button primary gestion" (click)="getAllCars()">Récupérer mes voitures</a>
     <ul>
       <li *ngFor="let car of listAllCars">
-          <span>{{ car.marque }}</span>
-          <span>{{ car.modele }}</span>
-          <button mat-raised-button (click)="getAllCars()" color="primary">Edit</button>
-          <button mat-raised-button (click)="deleteCar(car.id)" color="warn">Supprimer</button>
+        <span>{{ car.marque }} </span>
+        <span>{{ car.modele }}</span>
+        <a class="button primary gestion" (click)="modifier()">Modifier</a>
+        <a class="button primary gestion delete" (click)="deleteCar(car.id)" color="warn">Supprimer</a>
       </li>
-  </ul>
+     <span style="text-decoration: underline;"> {{ deleted}}</span>
+    </ul>
 
 
 
