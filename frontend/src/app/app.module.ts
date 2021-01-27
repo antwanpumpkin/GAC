@@ -8,8 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AccueilModule } from './accueil/accueil.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -20,14 +19,9 @@ import {MatListModule} from '@angular/material/list';
     HttpClientModule,
     RouterModule,
     AppRoutingModule,
-    AccueilModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatListModule
   ],
   exports: [
-    MatSidenavModule,
-    MatListModule
   ],
   providers: [
     {
