@@ -13,8 +13,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ini")
+  }
 
+  scroll(attr: string) {
+    document.querySelector('#' + attr).scrollIntoView({behavior: 'smooth'})
   }
 
 }
