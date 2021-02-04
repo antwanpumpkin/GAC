@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "voiture")
 public class Voiture {
@@ -24,6 +26,7 @@ public class Voiture {
     private String modele;
     
     @Column(name = "premiereImmat")
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private LocalDate premiereImmat;
 
     @Column(name = "puissanceFiscale")
