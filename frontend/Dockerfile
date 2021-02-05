@@ -13,3 +13,4 @@ COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
 
 #docker build -t frontend .
 #docker run --name frontend-container -d -p 4200:80 frontend
+#docker start frontend-container
