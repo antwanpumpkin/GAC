@@ -9,7 +9,11 @@ services:
          - POSTGRES_PASSWORD=toor
          - POSTGRES_USER=postgres
          - POSTGRES_DB=postgres
-# APP*****************************************
+  frontend:
+    image: frontend:latest
+    container_name: frontend-container
+    ports:
+      - 4200:80
   backend:
     image: backend:latest
     container_name: backend
