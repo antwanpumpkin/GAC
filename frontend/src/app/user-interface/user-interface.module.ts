@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { UserInterfaceComponent } from './container/user-interface/user-interface.component';
+import { GestionModule } from '../gestion/gestion.module';
 
 @NgModule({
   declarations: [
@@ -21,11 +22,10 @@ import { UserInterfaceComponent } from './container/user-interface/user-interfac
     UserInterfaceRoutingModule,
     RouterModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    GestionModule
   ],
   exports: [
-    HeaderComponent,
-    FooterComponent,
     MatSidenavModule,
     MatListModule,
     UserInterfaceComponent

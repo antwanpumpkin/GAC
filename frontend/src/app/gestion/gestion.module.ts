@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GestionRoutingModule } from './gestion-routing.module';
 import { GestionVoitureComponent } from './components/gestion-voiture/gestion-voiture.component';
 import { GestionInterfaceComponent } from './container/gestion-interface/gestion-interface.component';
 import { MatButtonModule} from '@angular/material/button';
@@ -13,7 +12,6 @@ import { FormsModule } from '@angular/forms';
   declarations: [GestionVoitureComponent, GestionInterfaceComponent],
   imports: [
     CommonModule,
-    GestionRoutingModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,

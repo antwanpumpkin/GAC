@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AccueilModule } from './accueil/accueil.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     AppComponent

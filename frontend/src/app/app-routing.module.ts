@@ -8,7 +8,7 @@ const APP_ROUTES: Routes = [
   },
   {
     path: '**',
-    redirectTo :'/accueil'
+    redirectTo :'/'
   }
 ]
 

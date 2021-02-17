@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccueilInterfaceComponent } from '../accueil/container/accueil-interface/accueil-interface.component';
+import { GestionInterfaceComponent } from '../gestion/container/gestion-interface/gestion-interface.component';
 import { UserInterfaceComponent } from './container/user-interface/user-interface.component';
 
 const routes: Routes = [
@@ -8,21 +10,24 @@ const routes: Routes = [
       component: UserInterfaceComponent,
       children: [
         {
-          path: 'accueil',
-          loadChildren: () => import('../accueil/accueil.module').then(m => m.AccueilModule),
-          data: { title: 'Accueil - GAC' }
+          path: '',
+          component: AccueilInterfaceComponent
         },
         {
           path: 'gestion',
-          loadChildren: () => import('../gestion/gestion.module').then(m => m.GestionModule),
-          data: { title: 'Gestion - GAC' }
+          component: GestionInterfaceComponent
+         // loadChildren: () => import('../gestion/gestion.module').then(m => m.GestionModule),
+        },
+        {
+          path: '**',
+          redirectTo: '/',
+          pathMatch: 'full'
         }
       ]
   },
 ];
 
 @NgModule({
-  declarations: [],
   imports: [RouterModule.forChild(routes)
   ],
   exports: [RouterModule]
