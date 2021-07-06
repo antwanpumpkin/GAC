@@ -4,13 +4,13 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 const APP_ROUTES: Routes = [
   {
     path: '',
-    loadChildren:() => import('./user-interface/user-interface.module').then(m => m.UserInterfaceModule),
+    loadChildren: () => import('./user-interface/user-interface.module').then(m => m.UserInterfaceModule),
   },
   {
     path: '**',
-    redirectTo :'/'
+    redirectTo : '/'
   }
-]
+];
 
 
 @NgModule({

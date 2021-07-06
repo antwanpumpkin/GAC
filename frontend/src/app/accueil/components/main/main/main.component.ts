@@ -6,17 +6,13 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent {
   title = 'Gestion d\'automobile de collection';
 
   constructor() {
   }
 
-  ngOnInit() {
-  }
-
   scroll(attr: string) {
-    document.querySelector('#' + attr).scrollIntoView({behavior: 'smooth'})
+    document.querySelector('#' + attr).scrollIntoView({behavior: 'smooth'});
   }
-
 }

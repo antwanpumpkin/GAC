@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { VoitureImpl } from 'src/app/shared/models/voiture-impl';
 import { Voiture } from 'src/ws_contrat/target/generated-sources/gac/models';
 import { VoitureService } from 'src/ws_contrat/target/generated-sources/gac/services';
+import { GestionVoitureService } from 'src/app/shared/service/gestion.voiture.service';
 
 @Component({
   selector: 'app-gestion-voiture',
@@ -27,7 +28,11 @@ export class GestionVoitureComponent implements OnInit {
 
   listAllCars: Array<Voiture>;
 
-  constructor(private voitureService: VoitureService, private http: HttpClient) {
+  constructor(private voitureService: VoitureService, private http: HttpClient, 
+    private gestionVoitureService: GestionVoitureService) {
+    this.gestionVoitureService.getCarState().subscribe((value) => {
+      console.log(value);
+    })
   }
 
   ngOnInit() {

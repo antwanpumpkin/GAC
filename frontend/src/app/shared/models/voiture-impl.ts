@@ -1,4 +1,4 @@
-import { Voiture } from "src/ws_contrat/target/generated-sources/gac/models";
+import { Voiture } from 'src/ws_contrat/target/generated-sources/gac/models';
 
 export class VoitureImpl implements Voiture {
     id: string;

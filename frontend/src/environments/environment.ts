@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBe: "http://localhost:8080"
+  urlBe: 'http://localhost:8080'
 };
 
 /*
