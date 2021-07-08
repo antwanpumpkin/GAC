@@ -1,14 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { AccueilInterfaceComponent } from './accueil/container/accueil-interface/accueil-interface.component';
+import { GestionInterfaceComponent } from './gestion/container/gestion-interface/gestion-interface.component';
 
 const APP_ROUTES: Routes = [
   {
     path: '',
-    loadChildren: () => import('./user-interface/user-interface.module').then(m => m.UserInterfaceModule),
+    component: AccueilInterfaceComponent
+  },
+  {
+    path: 'gestion',
+    component: GestionInterfaceComponent
   },
   {
     path: '**',
-    redirectTo : '/'
+    redirectTo: '/',
+    pathMatch: 'full'
   }
 ];
 
