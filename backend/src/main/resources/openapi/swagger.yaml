@@ -13,6 +13,8 @@ tags:
   description: "gestion des voiture"
 - name: "pieces"
   description: "Recherche de pièces"
+- name: "utilisateur"
+  description: "partie connexion - creation compte"
 schemes:
 - "https"
 - "http"
@@ -141,6 +143,56 @@ paths:
         required: true
         type: "string"
         format: "uuid"
+  /user/authentification:
+    post:
+      tags:
+      - "utilisateur"
+      summary: "connexion"
+      description: "connexion via user + passwd"
+      operationId: "connexion"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Authentification"
+      responses:
+        "200":
+          description: "user connected"
+          schema:
+            type: string
+            example: "OK"
+        "404":
+          description: "User not found"
+  /user/creation:
+    post:
+      tags:
+      - "utilisateur"
+      summary: "creation"
+      description: "creation de compte"
+      operationId: "creation"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/UserInfos"
+      responses:
+        "200":
+          description: "user connected"
+          schema:
+            type: string
+            example: "OK"
+        "404":
+          description: "User not found"
 definitions:
   Voiture:
     type: "object"
@@ -172,3 +224,27 @@ definitions:
         type: "string"
         format: "uuid"
         example: "0000-0000"
+  Authentification:
+    type: "object"
+    properties:
+      login:
+        type: "string"
+        example: "toto"
+      password:
+        type: "string"
+        example: "tata"
+  UserInfos:
+    type: "object"
+    properties:
+      login:
+        type: "string"
+        example: "toto"
+      password:
+        type: "string"
+        example: "tata"
+      prenom:
+        type: "string"
+        example: "Jacques"
+      nom:
+        type: "string"
+        example: "Martin"

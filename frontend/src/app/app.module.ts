@@ -6,11 +6,11 @@ import { AppComponent } from './app.component';
 import { HttpServiceInterceptor } from './shared/interceptors/http-service-interceptor';
 import { Router, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AccueilModule } from './accueil/accueil.module';
+import { AccueilModule } from './core/accueil/accueil.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GestionModule } from './gestion/gestion.module';
-import { HeaderComponent } from './user-interface/header/header.component';
-import { FooterComponent } from './user-interface/footer/footer.component';
+import { GestionModule } from './core/gestion/gestion.module';
+import { HeaderComponent } from './layout/user-interface/header/header.component';
+import { FooterComponent } from './layout/user-interface/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { FooterComponent } from './user-interface/footer/footer.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AccueilModule,
-    GestionModule,
+    GestionModule
   ],
   exports: [
   ],

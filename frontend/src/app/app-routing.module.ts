@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-import { AccueilInterfaceComponent } from './accueil/container/accueil-interface/accueil-interface.component';
-import { GestionInterfaceComponent } from './gestion/container/gestion-interface/gestion-interface.component';
+import { AccueilInterfaceComponent } from './core/accueil/container/accueil-interface/accueil-interface.component';
+import { GestionInterfaceComponent } from './core/gestion/container/gestion-interface/gestion-interface.component';
+import { UtilisateurModule } from './core/utilisateur/utilisateur.module';
 
 const APP_ROUTES: Routes = [
   {
@@ -11,6 +12,10 @@ const APP_ROUTES: Routes = [
   {
     path: 'gestion',
     component: GestionInterfaceComponent
+  },
+  {
+    path: 'utilisateur',
+    loadChildren: () => import('./core/utilisateur/utilisateur.module').then((m) => m.UtilisateurModule)
   },
   {
     path: '**',
