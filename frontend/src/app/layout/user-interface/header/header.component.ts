@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/shared/service/account-service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService: AccountService) {
+  }
 
   ngOnInit(): void {
   }
 
+  isConnected(): boolean {
+    this.accountService.user.subscribe((response) => {
+      console.log(response);
+      if (response != null) {
+        return true;
+      }
+      return false;
+    })
+    return false;
+  }
+
+  logout() {
+    this.accountService.logout();
+  }
 }

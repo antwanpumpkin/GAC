@@ -1,38 +1,38 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="firstname">Prénom</label>
-        <input type="text" formControlName="firstName" class="form-control"/>
-        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        <label for="prenom">Prénom</label>
+        <input type="text" formControlName="prenom" class="form-control"/>
+        <div *ngIf="submitted && f.prenom.errors" class="invalid-feedback">
+            <div *ngIf="f.prenom.errors.required">Le prénom est requis</div>
         </div>
     </div>
     <div class="form-group">
-        <label for="lastname">Nom</label>
-        <input type="text" formControlName="lastName" class="form-control" />
-        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        <label for="nom">Nom</label>
+        <input type="text" formControlName="nom" class="form-control" />
+        <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+            <div *ngIf="f.nom.errors.required">Le nom est requis</div>
         </div>
     </div>
     <div class="form-group">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" formControlName="username" class="form-control"/>
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-            <div *ngIf="f.username.errors.required">Username is required</div>
+            <div *ngIf="f.username.errors.required">Le nom d'utilisateur est requis</div>
         </div>
     </div>
     <div class="form-group">
         <label for="password">Mot de passe</label>
         <input type="password" formControlName="password" class="form-control" />
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="f.password.errors.required">Le mot de passe est requis</div>
+            <div *ngIf="f.password.errors.minlength">Le mot de passe doit faire au moins 6 caractères</div>
         </div>
     </div>
     <div class="form-group">
         <button [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            Register
+            S'enregistrer
         </button>
-        <a routerLink="../login" class="btn btn-link">Cancel</a>
+        <a routerLink="../login" class="btn btn-link">Annuler</a>
     </div>
 </form>

@@ -14,13 +14,12 @@ export class CreationComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private accountService: AccountService,
-    private utilisateurService: UtilisateurService) { }
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
+      prenom: ['', Validators.required],
+      nom: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', Validators.required, Validators.minLength(6)]
     })
@@ -41,14 +40,15 @@ export class CreationComponent implements OnInit {
     }*/
 
     const user = new UserInfosImpl();
+    user.prenom = this.form.controls['prenom'].value;
+    user.nom = this.form.controls['nom'].value;
     user.login = this.form.controls['username'].value;
-    user.prenom = this.form.controls['firstname'].value;
-    user.nom = this.form.controls['lastname'].value;
     user.password = this.form.controls['password'].value;
 
     this.loading = true;
     this.accountService.createUser(user).subscribe((response) => {
       console.log(response)
+      this.loading = false;
     });
   }
 }
