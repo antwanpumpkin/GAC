@@ -4,9 +4,9 @@
         <ul>
             <li><a class="button primary" [routerLink]="'/'">Accueil</a></li>
             <li><a class="button primary" [routerLink]="'/gestion'">Gestion</a></li>
-            <li><a class="button primary" *ngIf="!isConnected()" [routerLink]="'/utilisateur/connexion'">Connexion</a></li>
-            <li><a class="button primary" *ngIf="!isConnected()" [routerLink]="'/utilisateur/creation'">Création</a></li>
-            <li><a class="button primary" *ngIf="isConnected()" (click)="logout()">Déconnexion</a></li>
+            <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/connexion'">Connexion</a></li>
+            <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/creation'">Création</a></li>
+            <li><a class="button primary" *ngIf="user" (click)="logout()">Déconnexion</a></li>
 
          <!--   <li>
                 <a href="#">Layouts</a>

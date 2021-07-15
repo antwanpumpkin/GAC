@@ -8,21 +8,22 @@ import { AccountService } from 'src/app/shared/service/account-service';
 })
 export class HeaderComponent implements OnInit {
 
+  user = false;
   constructor(private accountService: AccountService) {
   }
 
   ngOnInit(): void {
-  }
-
-  isConnected(): boolean {
     this.accountService.user.subscribe((response) => {
-      console.log(response);
-      if (response != null) {
-        return true;
+      console.log(response)
+      if (response != undefined) {
+        console.log("true")
+        this.user = true;
       }
-      return false;
+      else {
+        console.log("false")
+        this.user = false;
+      }
     })
-    return false;
   }
 
   logout() {
