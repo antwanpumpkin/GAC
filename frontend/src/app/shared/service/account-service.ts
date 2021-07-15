@@ -23,6 +23,7 @@ export class AccountService {
       console.log(response);
       localStorage.setItem('user', JSON.stringify(infos));
       this.user.next(infos);
+      this.router.navigate(['/tableau-bord/accueil'])
     })
   }
 
