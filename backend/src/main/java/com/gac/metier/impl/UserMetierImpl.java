@@ -2,6 +2,8 @@ package com.gac.metier.impl;
 
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +23,14 @@ public class UserMetierImpl implements UserMetier {
 	@Autowired
 	UserMappeur userMappeur;
 
+    Logger log = LoggerFactory.getLogger(UserMetierImpl.class);
+
 	@Override
 	public String connexion(AuthentificationDTO body) {
+		log.info("mertier impl");
 		Optional<Users> user = userDao.findByLoginAndPassword(body.getLogin(),	body.getPassword());
 		if (user.isPresent()) {
+			log.info(user.get().toString());
 			return user.get().getLogin();
 		}
 		return null;
