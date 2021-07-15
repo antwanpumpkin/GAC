@@ -12,6 +12,11 @@ export class AccountService {
   user = new BehaviorSubject<AuthentificationImpl>(null);
 
   constructor(private utilisateurService: UtilisateurService, private router: Router) {
+    if (localStorage.getItem('user') !== undefined) {
+      let jsonObj = JSON.parse(localStorage.getItem('user'));
+      let fObj = <AuthentificationImpl>jsonObj;
+      this.user.next(fObj)
+    }
   }
 
   createUser(user: UserInfosImpl) {
