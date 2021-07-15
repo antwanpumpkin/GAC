@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { UtilisateurService } from "src/ws_contrat/target/generated-sources/gac/services/utilisateur.service";
 import { AuthentificationImpl } from "../models/authentification-impl";
 import { UserInfosImpl } from "../models/user-infos-impl";
@@ -9,7 +9,7 @@ import { UserInfosImpl } from "../models/user-infos-impl";
   providedIn: 'root'
 })
 export class AccountService {
-  user = new Subject<AuthentificationImpl>();
+  user = new BehaviorSubject<AuthentificationImpl>(null);
 
   constructor(private utilisateurService: UtilisateurService, private router: Router) {
   }
@@ -31,6 +31,6 @@ export class AccountService {
     console.log("logout");
     localStorage.removeItem('user');
     this.user.next(null);
-    this.router.navigate(['/accueil']);
+    this.router.navigate(['/']);
   }
 }

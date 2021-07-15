@@ -11,13 +11,14 @@ export class AuthGuard implements CanActivate {
     user: AuthentificationImpl;
 
     constructor(private accountService: AccountService) {
-    }
-
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        this.user = undefined;
         this.accountService.user.subscribe((user) => {
             console.log("Update user:" + JSON.stringify(user))
             this.user = user;
         })
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         console.log(this.user)
         if (this.user !== undefined) {
             return true;
