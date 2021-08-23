@@ -43,18 +43,16 @@ export class GestionVoitureComponent implements OnInit {
   }
 
   getCar() {
-    console.log("get car");
-    this.voitureService.getCarById(this.idRegistered).subscribe((response: Voiture) => {
-      console.log(response);
-    });
+    this.gestionVoitureService.getCar(this.idRegistered).subscribe((res) => {
+      console.log(res);
+    })
   }
 
   getAllCars() {
-    console.log("get all cars");
-    this.voitureService.getCarsByUserId("00000000-0000-0000-0000-000000000001").subscribe((response: Array<Voiture>) => {
-      console.log(response);
-      this.listAllCars = response;
-    });
+    this.gestionVoitureService.getAllCars().subscribe((res) => {
+      this.listAllCars = res;
+    })
+    console.log(this.listAllCars);
   }
 
   deleteCar(id: any) {
