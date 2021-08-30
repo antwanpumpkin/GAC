@@ -11,12 +11,7 @@ const APP_ROUTES: Routes = [
     component: AccueilInterfaceComponent
   },
   {
-    path: 'tableau-bord/accueil',
-    component: AccueilInterfaceComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'gestion',
+    path: 'tableau-bord/gestion',
     component: GestionInterfaceComponent,
     canActivate: [AuthGuard]
   },

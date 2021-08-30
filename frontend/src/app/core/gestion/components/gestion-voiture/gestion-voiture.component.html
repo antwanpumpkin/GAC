@@ -43,19 +43,19 @@
 
 
     </form>
-    <a class="button primary gestion" (click)="enregistrer()">Enregistrer le véhicule</a>
+    <a class="btn btn-light" (click)="enregistrer()">Enregistrer le véhicule</a>
     
     <span *ngIf="voitureEnregistree"> Voiture enregistrée avec l'id: {{idRegistered}} </span>
   </div>
 
   <div class="right-side">
-    <a class="button primary gestion" (click)="getAllCars()">Récupérer mes voitures</a>
+    <a class="btn btn-light" (click)="getAllCars()">Récupérer mes voitures</a>
     <ul>
       <li *ngFor="let car of listAllCars">
         <span>{{ car.marque }} </span>
         <span>{{ car.modele }}</span>
-        <a class="button primary gestion" (click)="modifier()">Modifier</a>
-        <a class="button primary gestion delete" (click)="deleteCar(car.id)" color="warn">Supprimer</a>
+        <a class="btn btn-light" (click)="modifier()">Modifier</a>
+        <a class="btn btn-danger" (click)="deleteCar(car.id)" color="warn">Supprimer</a>
       </li>
      <span style="text-decoration: underline;"> {{ deleted}}</span>
     </ul>

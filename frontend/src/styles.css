@@ -4125,17 +4125,8 @@ input, select, textarea {
     background-image: url("/assets/voiture-playmobil.jpg");    
   }
 
-  .gestion {
+  .btn {
 	margin: 10px;
-	color: black !important;
-	background-color: #f8f9fa !important;
-	height: 2em;
-	line-height: 2em;
-	padding: 0 1.25em;
-  }
-
-  .delete {
-	background-color: #dc3545 !important;
   }
 
   mat-label, .mat-select-value {
@@ -4153,7 +4144,7 @@ input, select, textarea {
   }
   
   .example-full-width {
-    width: 100%;
+    width: 75%;
   }
 
   .marque {
