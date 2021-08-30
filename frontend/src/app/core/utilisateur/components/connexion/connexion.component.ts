@@ -34,10 +34,9 @@ export class ConnexionComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
-   /* if (this.form.invalid) {
+    if (this.form.invalid) {
         return;
-    }*/
+    }
 
     const connexion = new AuthentificationImpl();
     connexion.login = this.form.controls['username'].value;

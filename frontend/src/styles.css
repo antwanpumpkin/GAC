@@ -84,7 +84,7 @@ input, select, textarea {
 	}
 
 	html, body {
-		background: #1c1d26;
+		background: #272833;
 	}
 
 	body.is-preload *, body.is-preload *:before, body.is-preload *:after {
@@ -4178,10 +4178,6 @@ input, select, textarea {
 	margin-left: 50%;
   }
 
-  .container {
-	  margin-left: 1%;
-  }
-
 #bloc-boutons {
     margin-top: 2%;
     margin-bottom: 2%;
@@ -4196,6 +4192,6 @@ input, select, textarea {
 }
 
 input {
-	background-color: #1c1d26 !important;
+	background-color: #272833  !important;
 	color: white !important;
 }
