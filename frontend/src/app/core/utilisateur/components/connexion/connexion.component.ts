@@ -42,7 +42,7 @@ export class ConnexionComponent implements OnInit {
     const connexion = new AuthentificationImpl();
     connexion.login = this.form.controls['username'].value;
     connexion.password = this.form.controls['password'].value;
-
+    console.log(connexion)
     this.accountService.authentification(connexion).subscribe((res) => {
       if (res == "KO") {
         this.message = "Erreur d'authentification"

@@ -29,6 +29,10 @@ public class UserApiImpl implements UserApi {
 	public ResponseEntity<String> connexion(@Valid AuthentificationDTO body) {
 		log.info("connexion");
 		String result = userMetier.connexion(body);
+
+		if (result == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		return new ResponseEntity<String>(result, HttpStatus.OK);		
 	}
 
@@ -36,7 +40,11 @@ public class UserApiImpl implements UserApi {
 	public ResponseEntity<String> creation(@Valid UserInfosDTO body) {
 		log.info("Creation compte");
 		String result = userMetier.creation(body);
-		return new ResponseEntity<String>(result, HttpStatus.CREATED);		
+
+		if (result != null) {
+			return new ResponseEntity<String>(result, HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

@@ -27,7 +27,7 @@ public class UserMetierImpl implements UserMetier {
 
 	@Override
 	public String connexion(AuthentificationDTO body) {
-		log.info("mertier impl");
+		log.info("Connexion");
 		Optional<Users> user = userDao.findByLoginAndPassword(body.getLogin(),	body.getPassword());
 		if (user.isPresent()) {
 			log.info(user.get().toString());
@@ -38,6 +38,7 @@ public class UserMetierImpl implements UserMetier {
 
 	@Override
 	public String creation(UserInfosDTO body) {
+		log.info("Création");
 		Users user = userMappeur.sourceToDestination(body);
 		Users usersaved = userDao.save(user);
 
