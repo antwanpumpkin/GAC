@@ -2239,7 +2239,7 @@ input, select, textarea {
 		outline: 0;
 		padding: 0 1em;
 		text-decoration: none;
-		width: 100%;
+		width: 30%;
 	}
 
 		input[type="text"]:invalid,
@@ -4174,4 +4174,8 @@ input, select, textarea {
 
   .right-side {
 	margin-left: 50%;
+  }
+
+  .container {
+	  margin-left: 1%;
   }

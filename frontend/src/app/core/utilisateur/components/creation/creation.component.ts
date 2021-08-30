@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreateUser } from 'src/app/shared/enum/create-user.enum';
 import { UserInfosImpl } from 'src/app/shared/models/user-infos-impl';
 import { AccountService } from 'src/app/shared/service/account-service';
 import { UtilisateurService } from 'src/ws_contrat/target/generated-sources/gac/services/utilisateur.service';
@@ -13,6 +14,7 @@ export class CreationComponent implements OnInit {
   form: FormGroup;
   loading = false;
   submitted = false;
+  message = "";
 
   constructor(private formBuilder: FormBuilder, private accountService: AccountService) { }
 
@@ -31,6 +33,7 @@ export class CreationComponent implements OnInit {
 
   onSubmit() {
     console.log("submit");
+    this.message = "";
     this.submitted = true;
 
     console.log(this.form.controls)
@@ -47,8 +50,13 @@ export class CreationComponent implements OnInit {
 
     this.loading = true;
     this.accountService.createUser(user).subscribe((response) => {
-      console.log(response)
       this.loading = false;
+      if (response == CreateUser.KO) {
+        this.message = "Erreur sur la création de compte"
+      }
+      else {
+        this.message = "Vous pouvez vous connecter avec vos identifiants"
+      }
     });
   }
 }

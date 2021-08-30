@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, of, Subject } from "rxjs";
 import { UtilisateurService } from "src/ws_contrat/target/generated-sources/gac/services/utilisateur.service";
 import { AuthentificationImpl } from "../models/authentification-impl";
 import { UserInfosImpl } from "../models/user-infos-impl";
+import { map, catchError } from 'rxjs/operators';
+import { CreateUser } from "../enum/create-user.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,15 @@ export class AccountService {
     }
   }
 
-  createUser(user: UserInfosImpl) {
-    return this.utilisateurService.creation(user);
+  createUser(user: UserInfosImpl): Observable<string> {
+    return this.utilisateurService.creation(user).pipe(
+      map((res: string) => {
+        return CreateUser.OK;
+      }),
+      catchError(():Observable<string> => {
+        return of(CreateUser.KO);
+      })
+    );
   }
 
   authentification(infos: AuthentificationImpl) {
