@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GestionModule } from './core/gestion/gestion.module';
 import { HeaderComponent } from './layout/user-interface/header/header.component';
 import { FooterComponent } from './layout/user-interface/footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FooterComponent } from './layout/user-interface/footer/footer.component
     AppRoutingModule,
     BrowserAnimationsModule,
     AccueilModule,
-    GestionModule
+    GestionModule,
+    ReactiveFormsModule
   ],
   exports: [
   ],

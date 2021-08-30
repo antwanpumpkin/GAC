@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StatusAccount } from 'src/app/shared/enum/status-account.enum';
 import { UserInfosImpl } from 'src/app/shared/models/user-infos-impl';
 import { AccountService } from 'src/app/shared/service/account-service';
-import { UtilisateurService } from 'src/ws_contrat/target/generated-sources/gac/services/utilisateur.service';
+import { FormAccountService } from 'src/app/shared/service/form-account.service';
 
 @Component({
   selector: 'app-creation',
@@ -16,15 +16,10 @@ export class CreationComponent implements OnInit {
   submitted = false;
   message = "";
 
-  constructor(private formBuilder: FormBuilder, private accountService: AccountService) { }
+  constructor(private formAccountService: FormAccountService, private accountService: AccountService) { }
 
-  ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      prenom: ['', Validators.required],
-      nom: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(6)]
-    })
+  ngOnInit() {
+    this.form = this.formAccountService.form;
   }
 
   get f() {
