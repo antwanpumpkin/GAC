@@ -11,13 +11,13 @@ import { StatusAccount } from "../enum/status-account.enum";
   providedIn: 'root'
 })
 export class AccountService {
-  user = new BehaviorSubject<AuthentificationImpl>(null);
+  user$ = new BehaviorSubject<AuthentificationImpl>(null);
 
   constructor(private utilisateurService: UtilisateurService, private router: Router) {
     if (localStorage.getItem('user') !== undefined) {
       let jsonObj = JSON.parse(localStorage.getItem('user'));
       let fObj = <AuthentificationImpl>jsonObj;
-      this.user.next(fObj)
+      this.user$.next(fObj)
     }
   }
 
@@ -36,7 +36,7 @@ export class AccountService {
     return this.utilisateurService.connexion(infos).pipe(
       map((res: string) => {
         localStorage.setItem('user', JSON.stringify(infos));
-        this.user.next(infos);
+        this.user$.next(infos);
         this.router.navigate(['/tableau-bord/accueil'])
         return StatusAccount.OK;
       }),
@@ -49,7 +49,7 @@ export class AccountService {
   logout() {
     console.log("logout");
     localStorage.removeItem('user');
-    this.user.next(null);
+    this.user$.next(null);
     this.router.navigate(['/']);
   }
 }

@@ -17,7 +17,8 @@ const APP_ROUTES: Routes = [
   },
   {
     path: 'gestion',
-    component: GestionInterfaceComponent
+    component: GestionInterfaceComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'utilisateur',

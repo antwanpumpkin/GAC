@@ -13,14 +13,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.accountService.user.subscribe((response) => {
+    this.accountService.user$.subscribe((response) => {
       console.log(response)
-      if (response != undefined) {
-        console.log("true")
+      if (response != undefined || response != null) {
+        console.log("connecté")
         this.user = true;
       }
       else {
-        console.log("false")
+        console.log("deconnecté")
         this.user = false;
       }
     })
