@@ -5,7 +5,7 @@ import { UtilisateurService } from "src/ws_contrat/target/generated-sources/gac/
 import { AuthentificationImpl } from "../models/authentification-impl";
 import { UserInfosImpl } from "../models/user-infos-impl";
 import { map, catchError } from 'rxjs/operators';
-import { CreateUser } from "../enum/create-user.enum";
+import { StatusAccount } from "../enum/status-account.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +24,26 @@ export class AccountService {
   createUser(user: UserInfosImpl): Observable<string> {
     return this.utilisateurService.creation(user).pipe(
       map((res: string) => {
-        return CreateUser.OK;
+        return StatusAccount.OK;
       }),
       catchError(():Observable<string> => {
-        return of(CreateUser.KO);
+        return of(StatusAccount.KO);
       })
     );
   }
 
-  authentification(infos: AuthentificationImpl) {
-    this.utilisateurService.connexion(infos).subscribe((response) => {
-      console.log(response);
-      localStorage.setItem('user', JSON.stringify(infos));
-      this.user.next(infos);
-      this.router.navigate(['/tableau-bord/accueil'])
-    })
+  authentification(infos: AuthentificationImpl): Observable<string> {
+    return this.utilisateurService.connexion(infos).pipe(
+      map((res: string) => {
+        localStorage.setItem('user', JSON.stringify(infos));
+        this.user.next(infos);
+        this.router.navigate(['/tableau-bord/accueil'])
+        return StatusAccount.OK;
+      }),
+      catchError((): Observable<string> => {
+        return of(StatusAccount.KO);
+      })
+    )
   }
 
   logout() {

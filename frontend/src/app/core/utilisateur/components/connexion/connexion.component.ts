@@ -14,6 +14,7 @@ export class ConnexionComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+  message = "";
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -42,6 +43,10 @@ export class ConnexionComponent implements OnInit {
     connexion.login = this.form.controls['username'].value;
     connexion.password = this.form.controls['password'].value;
 
-    this.accountService.authentification(connexion);
+    this.accountService.authentification(connexion).subscribe((res) => {
+      if (res == "KO") {
+        this.message = "Erreur d'authentification"
+      }
+    })
   }
 }

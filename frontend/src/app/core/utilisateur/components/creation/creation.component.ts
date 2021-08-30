@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CreateUser } from 'src/app/shared/enum/create-user.enum';
+import { StatusAccount } from 'src/app/shared/enum/status-account.enum';
 import { UserInfosImpl } from 'src/app/shared/models/user-infos-impl';
 import { AccountService } from 'src/app/shared/service/account-service';
 import { UtilisateurService } from 'src/ws_contrat/target/generated-sources/gac/services/utilisateur.service';
@@ -51,7 +51,7 @@ export class CreationComponent implements OnInit {
     this.loading = true;
     this.accountService.createUser(user).subscribe((response) => {
       this.loading = false;
-      if (response == CreateUser.KO) {
+      if (response == StatusAccount.KO) {
         this.message = "Erreur sur la création de compte"
       }
       else {
