@@ -6,6 +6,7 @@
             <li><a class="button primary" *ngIf="user" [routerLink]="'/tableau-bord/gestion'">Gestion</a></li>
             <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/connexion'">Connexion</a></li>
             <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/creation'">Création</a></li>
+            <li><a class="button primary" *ngIf="user" [routerLink]="'/utilisateur/profil'">Profil</a></li>
             <li><a class="button primary" *ngIf="user" (click)="logout()">Déconnexion</a></li>
 
          <!--   <li>

@@ -7,15 +7,18 @@ import { CreationComponent } from './components/creation/creation.component';
 import { UtilisateurRoutingRoutingModule } from './utilisateur-routing-routing.module';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProfilInterfaceComponent } from './containers/profil-interface/profil-interface.component';
+import { ProfilComponent } from './components/profil/profil.component';
 
 
 
 @NgModule({
-  declarations: [ConnexionInterfaceComponent, CreationInterfaceComponent, ConnexionComponent, CreationComponent],
+  declarations: [ConnexionInterfaceComponent, CreationInterfaceComponent, ConnexionComponent, CreationComponent, ProfilInterfaceComponent, ProfilComponent],
   imports: [
     CommonModule,
     UtilisateurRoutingRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class UtilisateurModule { }

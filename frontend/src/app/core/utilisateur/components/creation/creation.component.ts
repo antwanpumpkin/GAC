@@ -31,11 +31,11 @@ export class CreationComponent implements OnInit {
     this.message = "";
     this.submitted = true;
 
-    console.log(this.form.controls)
-   
-    /*if (this.form.invalid) {
+    console.log(this.form.invalid)
+    console.log(this.f.prenom.errors)
+    if (this.form.invalid) {
       return;
-    }*/
+    }
 
     const user = new UserInfosImpl();
     user.prenom = this.form.controls['prenom'].value;
