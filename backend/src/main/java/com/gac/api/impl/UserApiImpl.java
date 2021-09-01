@@ -2,6 +2,7 @@ package com.gac.api.impl;
 
 import javax.validation.Valid;
 
+import com.gac.modele.persistance.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,14 @@ public class UserApiImpl implements UserApi {
     UserMetier userMetier;
     
 	@Override
-	public ResponseEntity<String> connexion(@Valid AuthentificationDTO body) {
+	public ResponseEntity<UserInfosDTO> connexion(@Valid AuthentificationDTO body) {
 		log.info("connexion");
-		String result = userMetier.connexion(body);
+		UserInfosDTO result = userMetier.connexion(body);
 
 		if (result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<String>(result, HttpStatus.OK);		
+		return new ResponseEntity<UserInfosDTO>(result, HttpStatus.OK);
 	}
 
 	@Override

@@ -26,12 +26,13 @@ public class UserMetierImpl implements UserMetier {
     Logger log = LoggerFactory.getLogger(UserMetierImpl.class);
 
 	@Override
-	public String connexion(AuthentificationDTO body) {
+	public UserInfosDTO connexion(AuthentificationDTO body) {
 		log.info("Connexion");
 		Optional<Users> user = userDao.findByLoginAndPassword(body.getLogin(),	body.getPassword());
 		if (user.isPresent()) {
 			log.info(user.get().toString());
-			return user.get().getLogin();
+			UserInfosDTO userDTO = userMappeur.destinationTosource(user.get());
+			return userDTO;
 		}
 		return null;
 	}

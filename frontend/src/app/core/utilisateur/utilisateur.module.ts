@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfilInterfaceComponent } from './containers/profil-interface/profil-interface.component';
 import { ProfilComponent } from './components/profil/profil.component';
+import { TemplateModule } from 'src/app/shared/template/template.module';
 
 
 
@@ -18,6 +19,7 @@ import { ProfilComponent } from './components/profil/profil.component';
     CommonModule,
     UtilisateurRoutingRoutingModule,
     RouterModule,
+    TemplateModule,
     ReactiveFormsModule
   ]
 })

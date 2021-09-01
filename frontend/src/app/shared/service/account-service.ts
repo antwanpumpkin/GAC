@@ -6,6 +6,7 @@ import { AuthentificationImpl } from "../models/authentification-impl";
 import { UserInfosImpl } from "../models/user-infos-impl";
 import { map, catchError } from 'rxjs/operators';
 import { StatusAccount } from "../enum/status-account.enum";
+import { UserInfos } from "src/ws_contrat/target/generated-sources/gac/models";
 
 @Injectable({
   providedIn: 'root'
@@ -34,8 +35,8 @@ export class AccountService {
 
   authentification(infos: AuthentificationImpl): Observable<string> {
     return this.utilisateurService.connexion(infos).pipe(
-      map((res: string) => {
-        localStorage.setItem('user', JSON.stringify(infos));
+      map((res: UserInfosImpl) => {
+        localStorage.setItem('user', JSON.stringify(res));
         this.user$.next(infos);
         this.router.navigate(['/tableau-bord/accueil'])
         return StatusAccount.OK;
@@ -51,5 +52,9 @@ export class AccountService {
     localStorage.removeItem('user');
     this.user$.next(null);
     this.router.navigate(['/']);
+  }
+
+  getUser(): UserInfosImpl {
+    return JSON.parse(localStorage.getItem('user'));
   }
 }
