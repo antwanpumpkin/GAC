@@ -22,7 +22,7 @@
     </div>
     <div class="form-group">
         <label for="password">Mot de passe</label>
-        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid' : submitted && f.password.errors }" />
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid' : submitted && f.password.errors && creation }" />
         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
             <div *ngIf="f.password.errors.required">Le mot de passe est requis</div>
             <div *ngIf="f.password.errors.minlength">Le mot de passe doit faire au moins 6 caractères</div>
