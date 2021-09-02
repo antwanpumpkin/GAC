@@ -48,4 +48,14 @@ public class UserApiImpl implements UserApi {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<String> modification(@Valid UserInfosDTO body) {
+		log.info("Modification compte");
+		String result = userMetier.modification(body);
+
+		if (result != null) {
+			return new ResponseEntity<String>(result, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 }

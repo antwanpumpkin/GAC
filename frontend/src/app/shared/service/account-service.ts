@@ -47,6 +47,19 @@ export class AccountService {
     )
   }
 
+  modificationProfil(user: UserInfosImpl): Observable<string> {
+    return this.utilisateurService.modification(user).pipe(
+      map((res: string) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.user$.next(user);
+        return StatusAccount.OK;
+      }),
+      catchError(():Observable<string> => {
+        return of(StatusAccount.KO);
+      })
+    )
+  }
+
   logout() {
     console.log("logout");
     localStorage.removeItem('user');

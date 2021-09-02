@@ -192,6 +192,31 @@ paths:
             example: "OK"
         "404":
           description: "User not found"
+  /user/modification:
+    patch:
+      tags:
+        - "utilisateur"
+      summary: "modification"
+      description: "modification de compte"
+      operationId: "modification"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserInfos"
+      responses:
+        "200":
+          description: "user modified"
+          schema:
+            type: string
+            example: "OK"
+        "404":
+          description: "User not found"
 definitions:
   Voiture:
     type: "object"

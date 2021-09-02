@@ -11,4 +11,5 @@ import com.gac.modele.persistance.Users;
 @Repository
 public interface UserDao extends JpaRepository <Users, UUID> {
 	Optional<Users> findByLoginAndPassword(String login, String password);
+	Optional<Users> findByLogin(String login);
 }

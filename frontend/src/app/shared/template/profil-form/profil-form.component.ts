@@ -11,7 +11,7 @@ import { FormAccountService } from 'src/app/shared/service/form-account.service'
   styleUrls: ['./profil-form.component.css']
 })
 export class ProfilFormComponent implements OnInit {
-  @Input() creation : boolean;
+  @Input() creation: boolean;
   form: FormGroup;
   loading = false;
   submitted = false;
@@ -29,6 +29,7 @@ export class ProfilFormComponent implements OnInit {
       this.f.prenom.setValue(this.user.prenom);
       this.f.nom.setValue(this.user.nom);
       this.f.username.setValue(this.user.login);
+      this.f.username.disable();
     }
     else {
       this.f.prenom.setValue("");
@@ -46,25 +47,49 @@ export class ProfilFormComponent implements OnInit {
     this.message = "";
     this.submitted = true;
 
-    console.log(this.form.invalid)
-    if (this.form.invalid) {
-      return;
+    if (!this.creation) {
+      this.updateProfil();
     }
+    else {
+      console.log(this.form.invalid)
+      if (this.form.invalid) {
+        return;
+      }
 
+      const user = new UserInfosImpl();
+      user.prenom = this.form.controls['prenom'].value;
+      user.nom = this.form.controls['nom'].value;
+      user.login = this.form.controls['username'].value;
+      user.password = this.form.controls['password'].value;
+
+      this.loading = true;
+      this.accountService.createUser(user).subscribe((response) => {
+        this.loading = false;
+        if (response == StatusAccount.KO) {
+          this.message = "Erreur sur la création de compte"
+        }
+        else {
+          this.message = "Vous pouvez vous connecter avec vos identifiants"
+        }
+      });
+    }
+  }
+
+  updateProfil() {
     const user = new UserInfosImpl();
-    user.prenom = this.form.controls['prenom'].value;
-    user.nom = this.form.controls['nom'].value;
+    user.prenom = this.form.controls['prenom'].value != '' ? this.form.controls['prenom'].value : null;
+    user.nom = this.form.controls['nom'].value != '' ? this.form.controls['nom'].value : null;
+    user.password = this.form.controls['password'].value != '' ? this.form.controls['password'].value : null;
     user.login = this.form.controls['username'].value;
-    user.password = this.form.controls['password'].value;
 
     this.loading = true;
-    this.accountService.createUser(user).subscribe((response) => {
+    this.accountService.modificationProfil(user).subscribe((response) => {
       this.loading = false;
       if (response == StatusAccount.KO) {
-        this.message = "Erreur sur la création de compte"
+        this.message = "Erreur sur la modification de compte"
       }
       else {
-        this.message = "Vous pouvez vous connecter avec vos identifiants"
+        this.message = "Profil mis à jour"
       }
     });
   }

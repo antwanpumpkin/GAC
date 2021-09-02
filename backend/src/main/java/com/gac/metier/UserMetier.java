@@ -7,4 +7,5 @@ import com.gac.modele.persistance.Users;
 public interface UserMetier {
 	public UserInfosDTO connexion(AuthentificationDTO body);
 	public String creation(UserInfosDTO body);
+	public String modification(UserInfosDTO body);
 }
