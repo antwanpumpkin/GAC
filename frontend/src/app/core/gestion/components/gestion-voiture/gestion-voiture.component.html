@@ -54,7 +54,7 @@
       <li *ngFor="let car of listAllCars">
         <span>{{ car.marque }} </span>
         <span>{{ car.modele }}</span>
-        <a class="btn btn-light" (click)="modifier()">Modifier</a>
+        <a class="btn btn-light" [routerLink]="'/gestion/reparation'">Modifier</a>
         <a class="btn btn-danger" (click)="deleteCar(car.id)" color="warn">Supprimer</a>
       </li>
      <span style="text-decoration: underline;"> {{ deleted}}</span>

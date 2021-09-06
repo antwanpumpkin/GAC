@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { AccueilInterfaceComponent } from './core/accueil/container/accueil-interface/accueil-interface.component';
-import { GestionInterfaceComponent } from './core/gestion/container/gestion-interface/gestion-interface.component';
-import { UtilisateurModule } from './core/utilisateur/utilisateur.module';
 import { AuthGuard } from './shared/service/auth-guard';
 
 const APP_ROUTES: Routes = [
@@ -11,8 +9,8 @@ const APP_ROUTES: Routes = [
     component: AccueilInterfaceComponent
   },
   {
-    path: 'tableau-bord/gestion',
-    component: GestionInterfaceComponent,
+    path: 'gestion',
+    loadChildren: () => import('./core/gestion/gestion.module').then((m) => m.GestionModule),
     canActivate: [AuthGuard]
   },
   {

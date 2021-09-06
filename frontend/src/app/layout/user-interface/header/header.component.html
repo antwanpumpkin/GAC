@@ -3,7 +3,7 @@
     <nav id="nav">
         <ul>
             <li><a class="button primary" [routerLink]="'/'">Accueil</a></li>
-            <li><a class="button primary" *ngIf="user" [routerLink]="'/tableau-bord/gestion'">Gestion</a></li>
+            <li><a class="button primary" *ngIf="user" [routerLink]="'/gestion/voiture'">Gestion</a></li>
             <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/connexion'">Connexion</a></li>
             <li><a class="button primary" *ngIf="!user" [routerLink]="'/utilisateur/creation'">Création</a></li>
             <li><a class="button primary" *ngIf="user" [routerLink]="'/utilisateur/profil'">Profil</a></li>

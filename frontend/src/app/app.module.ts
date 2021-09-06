@@ -8,7 +8,6 @@ import { Router, RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AccueilModule } from './core/accueil/accueil.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { GestionModule } from './core/gestion/gestion.module';
 import { HeaderComponent } from './layout/user-interface/header/header.component';
 import { FooterComponent } from './layout/user-interface/footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +25,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     AccueilModule,
-    GestionModule,
     ReactiveFormsModule
   ],
   exports: [
