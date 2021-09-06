@@ -8,6 +8,7 @@ import com.gac.core.mappeur.ReparationMappeur;
 import com.gac.core.mappeur.UserMappeur;
 import com.gac.layer.dao.ReparationDao;
 import com.gac.layer.dao.UserDao;
+import com.gac.layer.dao.VoitureDao;
 import com.gac.metier.ReparationMetier;
 import com.gac.metier.UserMetier;
 import com.gac.modele.persistance.Reparation;
@@ -28,7 +29,10 @@ public class ReparationMetierImpl implements ReparationMetier {
 
 	@Autowired
 	ReparationDao reparationDao;
-	
+
+	@Autowired
+	VoitureDao voitureDao;
+
 	@Autowired
 	ReparationMappeur reparationMappeur;
 
@@ -53,10 +57,15 @@ public class ReparationMetierImpl implements ReparationMetier {
 
 	@Override
 	public String reparation(ReparationDTO body) {
-		log.info("Création");
+		log.info("Création: " + body.isFacture());
 		Reparation reparation = reparationMappeur.sourceToDestination(body);
-		Reparation reparationSaved = reparationDao.save(reparation);
 
+		Optional <Voiture> voiture = voitureDao.findById(body.getVoitureId());
+		if (voiture.isPresent()) {
+		reparation.setVoiture(voiture.get());
+		Reparation reparationSaved = reparationDao.save(reparation);
 		return reparationSaved.getId().toString();
+		}
+		return null;
 	}
 }

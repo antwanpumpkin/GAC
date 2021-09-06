@@ -10,7 +10,7 @@ public class Reparation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "voiture_id", referencedColumnName = "id")
     private Voiture voiture;
 

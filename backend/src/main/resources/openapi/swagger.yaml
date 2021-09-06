@@ -329,10 +329,11 @@ definitions:
     properties:
       voiture_id:
         type: "string"
-        example: "0001"
-      reparation_type:
+        format: "uuid"
+        example: "0000-0000"
+      type:
         type: "string"
         example: "freins"
-      fichier:
+      facture:
         type: "boolean"
         example: "false"

@@ -9,34 +9,34 @@ basePath: "/api"
 produces:
   - application/json
 tags:
-- name: "voiture"
-  description: "gestion des voiture"
-- name: "reparation"
-  description: "Réparations de la voiture"
-- name: "utilisateur"
-  description: "partie connexion - creation compte"
+  - name: "voiture"
+    description: "gestion des voiture"
+  - name: "reparation"
+    description: "Réparations de la voiture"
+  - name: "utilisateur"
+    description: "partie connexion - creation compte"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
   /voiture:
     post:
       tags:
-      - "voiture"
+        - "voiture"
       summary: "Ajout d'une nouvelle voiture"
       description: ""
       operationId: "addCar"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Car object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Voiture"
+        - in: "body"
+          name: "body"
+          description: "Car object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/Voiture"
       responses:
         "200":
           description: "successful operation"
@@ -49,12 +49,12 @@ paths:
   /voiture/{carId}:
     get:
       tags:
-      - "voiture"
+        - "voiture"
       summary: "Trouver une voiture par ID"
       description: "Returns a single car"
       operationId: "getCarById"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -66,20 +66,20 @@ paths:
           description: "Car not found"
     patch:
       tags:
-      - "voiture"
+        - "voiture"
       summary: "Modifier une voiture existante"
       description: ""
       operationId: "updateCar"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: body
-        name: params
-        required: true
-        schema:
-          $ref: "#/definitions/Voiture"
+        - in: body
+          name: params
+          required: true
+          schema:
+            $ref: "#/definitions/Voiture"
       responses:
         "200":
           description: "successful operation"
@@ -93,12 +93,12 @@ paths:
           description: "Validation exception"
     delete:
       tags:
-      - "voiture"
+        - "voiture"
       summary: "Supprimer une voiture"
       description: ""
       operationId: "deleteCar"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -119,12 +119,12 @@ paths:
   /voiture/gellAll/{userId}:
     get:
       tags:
-      - "voiture"
+        - "voiture"
       summary: "Trouver toute les voitures"
       description: "Returns all cars"
       operationId: "getCarsByUserId"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -146,44 +146,44 @@ paths:
   /user/authentification:
     post:
       tags:
-      - "utilisateur"
+        - "utilisateur"
       summary: "connexion"
       description: "connexion via user + passwd"
       operationId: "connexion"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Authentification"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Authentification"
       responses:
         "200":
           description: "user connected"
           schema:
-              $ref: "#/definitions/UserInfos"
+            $ref: "#/definitions/UserInfos"
         "404":
           description: "User not found"
   /user/creation:
     post:
       tags:
-      - "utilisateur"
+        - "utilisateur"
       summary: "creation"
       description: "creation de compte"
       operationId: "creation"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/UserInfos"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserInfos"
       responses:
         "200":
           description: "user connected"
@@ -195,20 +195,20 @@ paths:
   /user/modification:
     patch:
       tags:
-      - "utilisateur"
+        - "utilisateur"
       summary: "modification"
       description: "modification de compte"
       operationId: "modification"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/UserInfos"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/UserInfos"
       responses:
         "200":
           description: "user modified"
@@ -220,20 +220,20 @@ paths:
   /reparation:
     post:
       tags:
-      - "reparation"
+        - "reparation"
       summary: "reparation"
       description: "ajout d'une reparation"
       operationId: "reparation"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/Reparation"
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Reparation"
       responses:
         "200":
           description: "Réparation ajoutée"
@@ -245,12 +245,12 @@ paths:
   /reparation/gellAll/{voitureId}:
     get:
       tags:
-      - "reparation"
+        - "reparation"
       summary: "Trouver toute les réparations d'une voiture"
       description: "Returns all repairs"
       operationId: "getReparationByCarId"
       produces:
-      - "application/json"
+        - "application/json"
       responses:
         "200":
           description: "successful operation"
@@ -329,10 +329,11 @@ definitions:
     properties:
       voiture_id:
         type: "string"
-        example: "0001"
-      reparation_type:
+        format: "uuid"
+        example: "0000-0000"
+      type:
         type: "string"
         example: "freins"
-      fichier:
+      facture:
         type: "boolean"
         example: "false"
