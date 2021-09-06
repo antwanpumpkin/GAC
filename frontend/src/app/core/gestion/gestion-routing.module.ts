@@ -10,7 +10,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'reparation', component: ReparationInterfaceComponent,
+    path: 'reparation/:id', component: ReparationInterfaceComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -22,6 +22,6 @@
         </form>
         <a disabled>Télécharger la facture</a>
         <br>
-        <a class="btn btn-light"  [ngClass]="{ 'disabled': !reparationSelected}" >Ajouter la réparation</a>
+        <a class="btn btn-light" (click)="ajoutReparation()" [ngClass]="{ 'disabled': !reparationSelected}" >Ajouter la réparation</a>
     </div>
 </div>
