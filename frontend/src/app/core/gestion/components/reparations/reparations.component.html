@@ -1,1 +1,25 @@
-<p>reparations works!</p>
+<div class="parent">
+    <div class="left-side">
+        <form class="example-form">
+
+            <mat-form-field appearance="fill" class="marque">
+                <mat-label>Secteur</mat-label>
+                <mat-select (selectionChange)="selectionSecteur($event)">
+                    <mat-option *ngFor="let item of secteurList" [value]="item.secteur">
+                        {{item.secteur}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" *ngIf="secteurSelected != null">
+                <mat-label>Réparation</mat-label>
+                <mat-select (selectionChange)="selectionReparation($event)">
+                  <mat-option *ngFor="let item of reparationList.piece" [value]="item">
+                    {{item}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </form>
+        <a class="btn btn-light"  [ngClass]="{ 'disabled': !reparationSelected}" >Ajouter la réparation</a>
+    </div>
+</div>

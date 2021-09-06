@@ -1,0 +1,75 @@
+[
+    {
+        "secteur": "Moteur",
+        "piece": [
+            "Réservoir",
+            "Pompe à essence",
+            "Durite essence",
+            "Filtre à essence",
+            "Boîte à air",
+            "Filtre à air",
+            "Faisceaux",
+            "Bougies",
+            "Bobine",
+            "Radiateur",
+            "Ventilateur",
+            "Durite",
+            "Pompe à eau",
+            "Thermostat",
+            "Distribution",
+            "Batterie",
+            "Filtre à huile",
+            "Support moteur"
+        ]
+    },
+    {
+        "secteur": "Boîte de vitesse",
+        "piece": [
+            "Boîte de vitesse",
+            "Volant moteur ",
+            "Embrayage",
+            "Cardan"
+        ]
+    },
+    {
+        "secteur": "Freinage",
+        "piece": [
+            "Disques",
+            "Plaquette" ,
+            "Mastervac",
+            "Maître cylindre",
+            "Conduite cuivre",
+            "Flexible",
+            "Étrier" 
+        ]
+    },
+    {
+        "secteur": "Direction",
+        "piece": [
+            "Crémaillère",
+            "Pompe direction assistée" ,
+            "Biellette",
+            "Rotule direction",
+            "Moyeux",
+            "Pneus",
+            "Jantes" 
+        ]
+    },
+    {
+        "secteur": "Suspension",
+        "piece": [
+            "Amortisseurs",
+            "Tête d’amortisseur " ,
+            "Rotule de suspension",
+            "Triangle suspension",
+            "Barre stabilisatrice"
+        ]
+    },
+    {
+        "secteur": "Autre",
+        "piece": [
+            "Échappement",
+            "Berceau avant "
+        ]
+    }
+]
