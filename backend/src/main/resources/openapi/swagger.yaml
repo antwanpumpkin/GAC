@@ -11,8 +11,8 @@ produces:
 tags:
   - name: "voiture"
     description: "gestion des voiture"
-  - name: "pieces"
-    description: "Recherche de pièces"
+  - name: "reparation"
+    description: "Réparations de la voiture"
   - name: "utilisateur"
     description: "partie connexion - creation compte"
 schemes:
@@ -217,6 +217,58 @@ paths:
             example: "OK"
         "404":
           description: "User not found"
+  /reparation:
+    post:
+      tags:
+        - "reparation"
+      summary: "reparation"
+      description: "ajout d'une reparation"
+      operationId: "reparation"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Reparation"
+      responses:
+        "200":
+          description: "Réparation ajoutée"
+          schema:
+            type: string
+            example: "OK"
+        "404":
+          description: "Réparation KO"
+  /reparation/gellAll/{voitureId}:
+    get:
+      tags:
+        - "reparation"
+      summary: "Trouver toute les réparations d'une voiture"
+      description: "Returns all repairs"
+      operationId: "getReparationByCarId"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Reparation"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Car not found"
+    parameters:
+      - name: "voitureId"
+        in: "path"
+        description: "Car id"
+        required: true
+        type: "string"
+        format: "uuid"
 definitions:
   Voiture:
     type: "object"
@@ -272,3 +324,15 @@ definitions:
       nom:
         type: "string"
         example: "Martin"
+  Reparation:
+    type: "object"
+    properties:
+      voiture_id:
+        type: "string"
+        example: "0001"
+      reparation_type:
+        type: "string"
+        example: "freins"
+      fichier:
+        type: "boolean"
+        example: "false"
