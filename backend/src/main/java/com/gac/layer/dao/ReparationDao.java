@@ -11,4 +11,5 @@ import java.util.UUID;
 @Repository
 public interface ReparationDao extends JpaRepository <Reparation, UUID> {
 	Optional<List<Reparation>> findByVoitureId(UUID id);
+	void deleteByVoitureId(UUID id);
 }

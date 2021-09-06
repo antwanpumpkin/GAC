@@ -17,6 +17,8 @@ import com.gac.modele.persistance.Voiture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -65,6 +67,17 @@ public class ReparationMetierImpl implements ReparationMetier {
 		reparation.setVoiture(voiture.get());
 		Reparation reparationSaved = reparationDao.save(reparation);
 		return reparationSaved.getId().toString();
+		}
+		return null;
+	}
+
+	@Override
+	public String deleteReparation(UUID repairId) {
+		Optional<Reparation> reparation = reparationDao.findById(repairId);
+
+		if (reparation.isPresent()) {
+			reparationDao.delete(reparation.get());
+			return "repair deleted";
 		}
 		return null;
 	}

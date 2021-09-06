@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReparationImpl } from 'src/app/shared/models/reparation-impl';
 import { ReparationsService } from 'src/app/shared/service/reparations.service';
+import { Reparation } from 'src/ws_contrat/target/generated-sources/gac/models/reparation';
 
 @Component({
   selector: 'app-reparations',
@@ -13,9 +14,11 @@ export class ReparationsComponent implements OnInit {
   secteurList: any;
   reparationList: any;
   id: string
-  
   secteurSelected = null;  
   reparationSelected = null;
+  listDoneRepairs: Array<Reparation>;
+  deleted: string;
+
   private _jsonURL = 'assets/reparations.json';
 
   constructor(private http: HttpClient, private reparationService: ReparationsService,
@@ -30,6 +33,7 @@ export class ReparationsComponent implements OnInit {
     this.reparationService.getAllRepairs(this.id).subscribe((res) => {
       console.log(res);
     })
+    this.getReparations();
   }
 
   selectionSecteur(event: any) {
@@ -49,7 +53,23 @@ export class ReparationsComponent implements OnInit {
 
     this.reparationService.postRepair(repair).subscribe((res) => {
       console.log(res);
+      this.getReparations();
     })
   }
 
+  getReparations() {
+    this.reparationService.getAllRepairs(this.id).subscribe((res) => {
+      this.listDoneRepairs = res;
+    });
+  }
+
+  deleteRepair(id: string) {
+    this.reparationService.deleteRepair(id).subscribe((res) => {
+      console.log(res);
+      this.deleted = "Réparation supprimée";
+      this.getReparations();
+    }, error => {
+      this.deleted = "Echec de la suppression";
+    })
+  }
 }

@@ -242,6 +242,32 @@ paths:
             example: "OK"
         "404":
           description: "Réparation KO"
+  /reparation/{reparationId}:
+    delete:
+      tags:
+        - "reparation"
+      summary: "Supprimer une reparation"
+      description: ""
+      operationId: "deleteReparation"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: string
+            example: "OK"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Repair not found"
+    parameters:
+      - name: "reparationId"
+        in: "path"
+        description: "Repair id"
+        required: true
+        type: "string"
+        format: "uuid"
   /reparation/gellAll/{voitureId}:
     get:
       tags:
@@ -327,6 +353,10 @@ definitions:
   Reparation:
     type: "object"
     properties:
+      id:
+        type: "string"
+        format: "uuid"
+        example: "0000-0000"
       voiture_id:
         type: "string"
         format: "uuid"

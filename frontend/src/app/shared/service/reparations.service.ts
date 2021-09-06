@@ -32,4 +32,15 @@ export class ReparationsService {
       })
     )
   }
+
+  deleteRepair(id: string) {
+    return this.reparationService.deleteReparation(id).pipe(
+      map((res: string) => {
+        return res;
+      }),
+      catchError((): Observable<string> => {
+        return of (null);
+      })
+    )
+  }
 }

@@ -26,6 +26,17 @@ public class ReparationApiImpl implements ReparationApi {
     ReparationMetier reparationMetier;
 
     @Override
+    public ResponseEntity<String> deleteReparation(UUID reparationId) {
+        log.info("delete repair call");
+        String result = reparationMetier.deleteReparation(reparationId);
+        if (result != null) {
+        log.info("repair deleted: " + result);
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
     public ResponseEntity<List<ReparationDTO>> getReparationByCarId(UUID voitureId) {
         log.info("get all cars call for: " + voitureId);
         return new ResponseEntity<List<ReparationDTO>>(reparationMetier.getReparationByCarId(voitureId), HttpStatus.OK);

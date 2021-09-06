@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.gac.layer.dao.ReparationDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,11 @@ public class VoitureMetierImpl implements VoitureMetier {
 
 	@Autowired
 	VoitureDao voitureDao;
-	
+
+	@Autowired
+	ReparationDao reparationDao;
+
+
 	@Autowired
 	VoitureMappeur voitureMappeur;
 	
@@ -41,10 +46,11 @@ public class VoitureMetierImpl implements VoitureMetier {
 		Optional<Voiture> voiture = voitureDao.findById(carId);
 		
 		if (voiture.isPresent()) {
+
 			voitureDao.delete(voiture.get());
 			return "car deleted";
 		}
-		return "failed to delete";
+		return null;
 	}
 
 	@Override

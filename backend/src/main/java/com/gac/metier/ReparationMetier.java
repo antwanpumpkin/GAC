@@ -11,4 +11,5 @@ import java.util.UUID;
 public interface ReparationMetier {
 	public List<ReparationDTO> getReparationByCarId(UUID voitureId);
 	public String reparation(ReparationDTO body);
+	public String deleteReparation(UUID repairId);
 }

@@ -1,14 +1,10 @@
 package com.gac.modele.persistance;
 
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -41,6 +37,9 @@ public class Voiture {
     
     @Column(name = "userId")
     private UUID userId;
+
+	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+	private Set<Reparation> reparation;
 
 	public UUID getId() {
 		return id;

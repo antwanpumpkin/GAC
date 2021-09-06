@@ -24,4 +24,20 @@
         <br>
         <a class="btn btn-light" (click)="ajoutReparation()" [ngClass]="{ 'disabled': !reparationSelected}" >Ajouter la réparation</a>
     </div>
+
+    
+  <div class="right-side">
+    <h3>Réparations effectuées:</h3>
+    <ul>
+      <li *ngFor="let repair of listDoneRepairs">
+        <span>{{ repair.type }} </span>
+        <a class="btn btn-danger" (click)="deleteRepair(repair.id)" color="warn">Supprimer</a>
+      </li>
+     <span style="text-decoration: underline;"> {{ deleted }}</span>
+    </ul>
+
+
+
+
+  </div>
 </div>
