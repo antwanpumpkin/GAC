@@ -38,7 +38,7 @@ public class Voiture {
     @Column(name = "userId")
     private UUID userId;
 
-	@OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE)
 	private Set<Reparation> reparation;
 
 	public UUID getId() {

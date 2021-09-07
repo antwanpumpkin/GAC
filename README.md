@@ -14,5 +14,3 @@ Renseigner les réparations effectuées, et celles à faire
 s'en suit une estimation de l'état de la voiture (upload la facture pour valider la réparation)
 Icone ? si attente fichier, V si facture upload
 déterminer un % de répération pour estimer si le véhicule à bien été suivi ou non
-
-créer une table reparation avec fk sur id voiture
