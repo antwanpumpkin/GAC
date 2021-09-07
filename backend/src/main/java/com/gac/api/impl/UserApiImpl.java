@@ -38,9 +38,9 @@ public class UserApiImpl implements UserApi {
 	}
 
 	@Override
-	public ResponseEntity<String> creation(@Valid UserInfosDTO body) {
+	public ResponseEntity<String> create(@Valid UserInfosDTO body) {
 		log.info("Creation compte");
-		String result = userMetier.creation(body);
+		String result = userMetier.create(body);
 
 		if (result != null) {
 			return new ResponseEntity<String>(result, HttpStatus.CREATED);

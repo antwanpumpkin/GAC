@@ -9,20 +9,20 @@ basePath: "/api"
 produces:
   - application/json
 tags:
-  - name: "voiture"
+  - name: "car"
     description: "gestion des voiture"
-  - name: "reparation"
+  - name: "repair"
     description: "Réparations de la voiture"
-  - name: "utilisateur"
+  - name: "user"
     description: "partie connexion - creation compte"
 schemes:
   - "https"
   - "http"
 paths:
-  /voiture:
+  /car:
     post:
       tags:
-        - "voiture"
+        - "car"
       summary: "Ajout d'une nouvelle voiture"
       description: ""
       operationId: "addCar"
@@ -36,7 +36,7 @@ paths:
           description: "Car object that needs to be added to the store"
           required: true
           schema:
-            $ref: "#/definitions/Voiture"
+            $ref: "#/definitions/Car"
       responses:
         "200":
           description: "successful operation"
@@ -46,10 +46,10 @@ paths:
             example: "40bad878-badf-4601-a729-e0dea0c7cc16"
         "405":
           description: "Invalid input"
-  /voiture/{carId}:
+  /car/{carId}:
     get:
       tags:
-        - "voiture"
+        - "car"
       summary: "Trouver une voiture par ID"
       description: "Returns a single car"
       operationId: "getCarById"
@@ -59,14 +59,14 @@ paths:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Voiture"
+            $ref: "#/definitions/Car"
         "400":
           description: "Invalid ID supplied"
         "404":
           description: "Car not found"
     patch:
       tags:
-        - "voiture"
+        - "car"
       summary: "Modifier une voiture existante"
       description: ""
       operationId: "updateCar"
@@ -79,12 +79,12 @@ paths:
           name: params
           required: true
           schema:
-            $ref: "#/definitions/Voiture"
+            $ref: "#/definitions/Car"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Voiture"
+            $ref: "#/definitions/Car"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -93,7 +93,7 @@ paths:
           description: "Validation exception"
     delete:
       tags:
-        - "voiture"
+        - "car"
       summary: "Supprimer une voiture"
       description: ""
       operationId: "deleteCar"
@@ -116,10 +116,10 @@ paths:
         required: true
         type: "string"
         format: "uuid"
-  /voiture/gellAll/{userId}:
+  /car/gellAll/{userId}:
     get:
       tags:
-        - "voiture"
+        - "car"
       summary: "Trouver toute les voitures"
       description: "Returns all cars"
       operationId: "getCarsByUserId"
@@ -131,7 +131,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Voiture"
+              $ref: "#/definitions/Car"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -146,7 +146,7 @@ paths:
   /user/authentification:
     post:
       tags:
-        - "utilisateur"
+        - "user"
       summary: "connexion"
       description: "connexion via user + passwd"
       operationId: "connexion"
@@ -167,13 +167,13 @@ paths:
             $ref: "#/definitions/UserInfos"
         "404":
           description: "User not found"
-  /user/creation:
+  /user/create:
     post:
       tags:
-        - "utilisateur"
+        - "user"
       summary: "creation"
       description: "creation de compte"
-      operationId: "creation"
+      operationId: "create"
       consumes:
         - "application/json"
       produces:
@@ -195,7 +195,7 @@ paths:
   /user/modification:
     patch:
       tags:
-        - "utilisateur"
+        - "user"
       summary: "modification"
       description: "modification de compte"
       operationId: "modification"
@@ -217,13 +217,13 @@ paths:
             example: "OK"
         "404":
           description: "User not found"
-  /reparation:
+  /repair:
     post:
       tags:
-        - "reparation"
+        - "repair"
       summary: "reparation"
       description: "ajout d'une reparation"
-      operationId: "reparation"
+      operationId: "addRepair"
       consumes:
         - "application/json"
       produces:
@@ -233,7 +233,7 @@ paths:
           name: "body"
           required: true
           schema:
-            $ref: "#/definitions/Reparation"
+            $ref: "#/definitions/Repair"
       responses:
         "200":
           description: "Réparation ajoutée"
@@ -242,13 +242,13 @@ paths:
             example: "OK"
         "404":
           description: "Réparation KO"
-  /reparation/{reparationId}:
+  /repair/{reparationId}:
     delete:
       tags:
-        - "reparation"
+        - "repair"
       summary: "Supprimer une reparation"
       description: ""
-      operationId: "deleteReparation"
+      operationId: "deleteRepair"
       produces:
         - "application/json"
       responses:
@@ -268,10 +268,10 @@ paths:
         required: true
         type: "string"
         format: "uuid"
-  /reparation/gellAll/{voitureId}:
+  /repair/gellAll/{voitureId}:
     get:
       tags:
-        - "reparation"
+        - "repair"
       summary: "Trouver toute les réparations d'une voiture"
       description: "Returns all repairs"
       operationId: "getReparationByCarId"
@@ -283,7 +283,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Reparation"
+              $ref: "#/definitions/Repair"
         "400":
           description: "Invalid ID supplied"
         "404":
@@ -296,7 +296,7 @@ paths:
         type: "string"
         format: "uuid"
 definitions:
-  Voiture:
+  Car:
     type: "object"
     properties:
       marque:
@@ -350,7 +350,7 @@ definitions:
       nom:
         type: "string"
         example: "Martin"
-  Reparation:
+  Repair:
     type: "object"
     properties:
       id:

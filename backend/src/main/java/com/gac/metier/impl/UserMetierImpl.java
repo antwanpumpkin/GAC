@@ -38,7 +38,7 @@ public class UserMetierImpl implements UserMetier {
 	}
 
 	@Override
-	public String creation(UserInfosDTO body) {
+	public String create(UserInfosDTO body) {
 		log.info("Création");
 		Users user = userMappeur.sourceToDestination(body);
 		Users usersaved = userDao.save(user);

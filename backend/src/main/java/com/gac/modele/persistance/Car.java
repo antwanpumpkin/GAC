@@ -1,6 +1,7 @@
 package com.gac.modele.persistance;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,8 +10,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "voiture")
-public class Voiture {
+@Table(name = "car")
+public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -27,7 +28,6 @@ public class Voiture {
 
     @Column(name = "puissanceFiscale")
     private Integer puissanceFiscale;
-
     
     @Column(name = "prixDachat")
     private Integer prixDachat;
@@ -38,8 +38,8 @@ public class Voiture {
     @Column(name = "userId")
     private UUID userId;
 
-	@OneToMany(mappedBy = "id", cascade = CascadeType.REMOVE)
-	private Set<Reparation> reparation;
+	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Repair> repairs;
 
 	public UUID getId() {
 		return id;
@@ -103,5 +103,22 @@ public class Voiture {
 
 	public void setUserId(UUID userId) {
 		this.userId = userId;
+	}
+
+	public void addRepair(Repair repair){
+		repairs.add(repair);
+		repair.setCar(this);
+	}
+	public void removeRepair(Repair repair){
+		repairs.remove(repair);
+		repair.setCar(null);
+	}
+
+	public Set<Repair> getRepairs() {
+		return repairs;
+	}
+
+	public void setRepairs(Set<Repair> repairs) {
+		this.repairs = repairs;
 	}
 }

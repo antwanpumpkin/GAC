@@ -4,15 +4,15 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "reparation")
-public class Reparation {
+@Table(name = "repair")
+public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @ManyToOne()
-    @JoinColumn(name = "voiture_id", referencedColumnName = "id")
-    private Voiture voiture;
+    @JoinColumn(name = "car_id")
+    private Car car;
 
     @Column(name = "type", nullable = false)
     private String type;
@@ -26,14 +26,6 @@ public class Reparation {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public Voiture getVoiture() {
-        return voiture;
-    }
-
-    public void setVoiture(Voiture voiture) {
-        this.voiture = voiture;
     }
 
     public String getType() {
@@ -50,5 +42,13 @@ public class Reparation {
 
     public void setFacture(Boolean facture) {
         this.facture = facture;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 }

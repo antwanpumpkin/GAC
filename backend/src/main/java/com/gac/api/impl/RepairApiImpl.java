@@ -1,9 +1,8 @@
 package com.gac.api.impl;
 
-import com.gac.api.layer.v1.ReparationApi;
-import com.gac.api.modele.dto.v1.ReparationDTO;
-import com.gac.api.modele.dto.v1.VoitureDTO;
-import com.gac.metier.ReparationMetier;
+import com.gac.api.layer.v1.RepairApi;
+import com.gac.api.modele.dto.v1.RepairDTO;
+import com.gac.metier.RepairMetier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +18,16 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api")
 @CrossOrigin(origins = "http://localhost:4200")
-public class ReparationApiImpl implements ReparationApi {
-    Logger log = LoggerFactory.getLogger(ReparationApiImpl.class);
+public class RepairApiImpl implements RepairApi {
+    Logger log = LoggerFactory.getLogger(RepairApiImpl.class);
 
     @Autowired
-    ReparationMetier reparationMetier;
+    RepairMetier repairMetier;
 
     @Override
-    public ResponseEntity<String> deleteReparation(UUID reparationId) {
+    public ResponseEntity<String> deleteRepair(UUID repairId) {
         log.info("delete repair call");
-        String result = reparationMetier.deleteReparation(reparationId);
+        String result = repairMetier.deleteRepair(repairId);
         if (result != null) {
         log.info("repair deleted: " + result);
         return new ResponseEntity<String>(result, HttpStatus.OK);
@@ -37,15 +36,15 @@ public class ReparationApiImpl implements ReparationApi {
     }
 
     @Override
-    public ResponseEntity<List<ReparationDTO>> getReparationByCarId(UUID voitureId) {
-        log.info("get all cars call for: " + voitureId);
-        return new ResponseEntity<List<ReparationDTO>>(reparationMetier.getReparationByCarId(voitureId), HttpStatus.OK);
+    public ResponseEntity<List<RepairDTO>> getReparationByCarId(UUID carId) {
+        log.info("get all cars call for: " + carId);
+        return new ResponseEntity<List<RepairDTO>>(repairMetier.getRepairByCarId(carId), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<String> reparation(ReparationDTO body) {
+    public ResponseEntity<String> addRepair(RepairDTO body) {
         log.info("Creation reparation");
-        String result = reparationMetier.reparation(body);
+        String result = repairMetier.addRepair(body);
 
         if (result != null) {
             return new ResponseEntity<String>(result, HttpStatus.CREATED);
