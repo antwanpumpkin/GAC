@@ -1,6 +1,6 @@
-import { Voiture } from 'src/ws_contrat/target/generated-sources/gac/models';
+import { Car } from 'src/ws_contrat/target/generated-sources/gac/models/car';
 
-export const VOITURE_MOCK : Voiture = {
+export const VOITURE_MOCK : Car = {
     id: '1',
     marque: 'BMW',
     modele: 'Z8',

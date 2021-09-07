@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReparationImpl } from 'src/app/shared/models/reparation-impl';
 import { ReparationsService } from 'src/app/shared/service/reparations.service';
-import { Reparation } from 'src/ws_contrat/target/generated-sources/gac/models/reparation';
+import { Repair } from 'src/ws_contrat/target/generated-sources/gac/models/repair';
 
 @Component({
   selector: 'app-reparations',
@@ -16,7 +16,7 @@ export class ReparationsComponent implements OnInit {
   id: string
   secteurSelected = null;  
   reparationSelected = null;
-  listDoneRepairs: Array<Reparation>;
+  listDoneRepairs: Array<Repair>;
   deleted: string;
 
   private _jsonURL = 'assets/reparations.json';

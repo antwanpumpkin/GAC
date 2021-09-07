@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Reparation } from 'src/ws_contrat/target/generated-sources/gac/models/reparation';
+import { Repair } from 'src/ws_contrat/target/generated-sources/gac/models/repair';
 import { ReparationImpl } from '../models/reparation-impl';
-import { ReparationService } from 'src/ws_contrat/target/generated-sources/gac/services/reparation.service';
+import { RepairService } from 'src/ws_contrat/target/generated-sources/gac/services/repair.service';
 @Injectable({
   providedIn: 'root'
 })
 export class ReparationsService {
 
-  constructor(private reparationService: ReparationService) { }
+  constructor(private repairService: RepairService) { }
 
   postRepair(reparation: ReparationImpl): Observable<string> {
-    return this.reparationService.reparation(reparation).pipe(
+    return this.repairService.addRepair(reparation).pipe(
       map((res: string) => {
         return res;
       }),
@@ -22,19 +22,19 @@ export class ReparationsService {
     )
   }
 
-  getAllRepairs(id: string):Observable<Reparation[]> {
-    return this.reparationService.getReparationByCarId(id).pipe(
-      map((res: Reparation[]) => {
+  getAllRepairs(id: string):Observable<Repair[]> {
+    return this.repairService.getReparationByCarId(id).pipe(
+      map((res: Repair[]) => {
         return res;
       }),
-      catchError((): Observable<Reparation[]> => {
+      catchError((): Observable<Repair[]> => {
         return of (null);
       })
     )
   }
 
   deleteRepair(id: string) {
-    return this.reparationService.deleteReparation(id).pipe(
+    return this.repairService.deleteRepair(id).pipe(
       map((res: string) => {
         return res;
       }),

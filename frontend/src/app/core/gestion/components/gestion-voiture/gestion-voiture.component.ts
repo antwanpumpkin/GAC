@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { VoitureImpl } from 'src/app/shared/models/voiture-impl';
-import { Voiture } from 'src/ws_contrat/target/generated-sources/gac/models';
-import { VoitureService } from 'src/ws_contrat/target/generated-sources/gac/services';
+import { Car } from 'src/ws_contrat/target/generated-sources/gac/models/car';
+import { CarService } from 'src/ws_contrat/target/generated-sources/gac/services/car.service';
 import { GestionVoitureService } from 'src/app/shared/service/gestion.voiture.service';
 
 @Component({
@@ -26,9 +26,9 @@ export class GestionVoitureComponent implements OnInit {
   idRegistered : string;
   deleted: string;
 
-  listAllCars: Array<Voiture>;
+  listAllCars: Array<Car>;
 
-  constructor(private voitureService: VoitureService, private http: HttpClient, 
+  constructor(private carService: CarService, private http: HttpClient, 
     private gestionVoitureService: GestionVoitureService) {
     this.gestionVoitureService.getCarState().subscribe((value) => {
       console.log(value);
@@ -57,7 +57,7 @@ export class GestionVoitureComponent implements OnInit {
 
   deleteCar(id: any) {
     console.log("demande suppresion voiture avec id: " + id);
-    this.voitureService.deleteCar(id).subscribe((response: string) => {
+    this.carService.deleteCar(id).subscribe((response: string) => {
       console.log(response);
       this.deleted = "Voiture supprimée";
       this.getAllCars();
@@ -89,7 +89,7 @@ export class GestionVoitureComponent implements OnInit {
     this.voiture.puissanceFiscale = this.puissanceFiscale;
 
     console.log(this.voiture);
-    this.voitureService.addCar(this.voiture).subscribe((response) => {
+    this.carService.addCar(this.voiture).subscribe((response) => {
       this.voitureEnregistree = true;
       this.idRegistered = response.replace(/\"/g,"");
       console.log(this.idRegistered);

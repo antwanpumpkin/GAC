@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of, Subject } from "rxjs";
-import { UtilisateurService } from "src/ws_contrat/target/generated-sources/gac/services/utilisateur.service";
+import { UserService } from "src/ws_contrat/target/generated-sources/gac/services/user.service";
 import { AuthentificationImpl } from "../models/authentification-impl";
 import { UserInfosImpl } from "../models/user-infos-impl";
 import { map, catchError } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { UserInfos } from "src/ws_contrat/target/generated-sources/gac/models";
 export class AccountService {
   user$ = new BehaviorSubject<AuthentificationImpl>(null);
 
-  constructor(private utilisateurService: UtilisateurService, private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
     if (localStorage.getItem('user') !== undefined) {
       let jsonObj = JSON.parse(localStorage.getItem('user'));
       let fObj = <AuthentificationImpl>jsonObj;
@@ -23,7 +23,7 @@ export class AccountService {
   }
 
   createUser(user: UserInfosImpl): Observable<string> {
-    return this.utilisateurService.creation(user).pipe(
+    return this.userService.create(user).pipe(
       map((res: string) => {
         return StatusAccount.OK;
       }),
@@ -34,7 +34,7 @@ export class AccountService {
   }
 
   authentification(infos: AuthentificationImpl): Observable<string> {
-    return this.utilisateurService.connexion(infos).pipe(
+    return this.userService.connexion(infos).pipe(
       map((res: UserInfosImpl) => {
         localStorage.setItem('user', JSON.stringify(res));
         this.user$.next(infos);
@@ -48,7 +48,7 @@ export class AccountService {
   }
 
   modificationProfil(user: UserInfosImpl): Observable<string> {
-    return this.utilisateurService.modification(user).pipe(
+    return this.userService.modification(user).pipe(
       map((res: string) => {
         localStorage.setItem('user', JSON.stringify(user));
         this.user$.next(user);

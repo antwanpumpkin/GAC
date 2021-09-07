@@ -1,6 +1,6 @@
-import { Reparation } from "src/ws_contrat/target/generated-sources/gac/models/reparation";
+import { Repair } from "src/ws_contrat/target/generated-sources/gac/models/repair";
 
-export class ReparationImpl implements Reparation {
+export class ReparationImpl implements Repair {
     id: string;
     facture: boolean;
     type: string;
