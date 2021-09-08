@@ -5,6 +5,8 @@ import { Car } from 'src/ws_contrat/target/generated-sources/gac/models/car';
 import { CarService } from 'src/ws_contrat/target/generated-sources/gac/services/car.service';
 import { GestionVoitureService } from 'src/app/shared/service/gestion.voiture.service';
 import { AuthGuard } from 'src/app/shared/service/auth-guard';
+import { FormCarService } from 'src/app/shared/service/form-car.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-gestion-voiture',
@@ -16,32 +18,33 @@ export class GestionVoitureComponent implements OnInit {
   modeleList: any;
   private _jsonURL = 'assets/carlist.json';
 
-  brandSelected = null;  
-  modeleSelected = null;
-  premiereImmat = null;
-  puissanceFiscale = null;
-  prixAchat = null;
-  prixVenteEstimee = null;
+  form: FormGroup;
   voiture : VoitureImpl;
   voitureEnregistree = false;
   deleted: string;
-
+  submitted = false;
   listAllCars: Array<Car>;
 
   constructor(private carService: CarService, private http: HttpClient, 
-    private gestionVoitureService: GestionVoitureService, private authGuard: AuthGuard) {
+    private gestionVoitureService: GestionVoitureService, private authGuard: AuthGuard,
+    private formCarService: FormCarService) {
+      this.form = this.formCarService.form;
     this.gestionVoitureService.getCarState().subscribe((value) => {
       console.log(value);
     })
   }
 
   ngOnInit() {
+    this.f.marque.setValue("")
     this.http.get(this._jsonURL).subscribe(data =>{
       this.carList = data;
     })
     this.getAllCars();
   }
 
+  get f() {
+    return this.form.controls;
+  }
 
   getAllCars() {
     this.gestionVoitureService.getAllCars().subscribe((res) => {
@@ -63,26 +66,31 @@ export class GestionVoitureComponent implements OnInit {
   }
 
   selectionMarque(event: any) {
-    this.brandSelected = event.value
-    this.modeleList = this.carList.filter(list => list.brand == event.value)[0];
+    this.f.marque.setValue(event);
+    this.modeleList = this.carList.filter(list => list.brand == event)[0];
     console.log(this.modeleList)
   }
 
   selectionModele(event: any) {
-    this.modeleSelected = event.value;
+    this.f.modele.setValue(event);
   }
 
   enregistrer() {
     let date = new Date();
-    
+    this.submitted = true;
+
+    console.log(this.form.invalid)
+    if (this.form.invalid) {
+      return;
+    }
     this.voiture = new VoitureImpl();
     this.voiture.userId = this.authGuard.user.id;
-    this.voiture.marque = this.brandSelected;
-    this.voiture.modele = this.modeleSelected;
+    this.voiture.marque = this.f.marque.value;
+    this.voiture.modele = this.f.modele.value;
     this.voiture.premiereImmat = null//this.premiereImmat;
-    this.voiture.prixDachat = this.prixAchat;
-    this.voiture.prixVenteEstimee = this.prixVenteEstimee;
-    this.voiture.puissanceFiscale = this.puissanceFiscale;
+    this.voiture.prixDachat = this.f.prixAchat.value;
+    this.voiture.prixVenteEstimee = this.f.prixVenteEstimee.value;
+    this.voiture.puissanceFiscale = this.f.puissanceFiscale.value;
 
     console.log(this.voiture);
     this.carService.addCar(this.voiture).subscribe(() => {

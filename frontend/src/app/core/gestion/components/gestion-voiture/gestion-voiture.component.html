@@ -1,50 +1,78 @@
 <div class="parent">
   <div class="left-side">
-    <form class="example-form">
-
-      <mat-form-field appearance="fill" class="marque">
-        <mat-label>Marque</mat-label>
-        <mat-select (selectionChange)="selectionMarque($event)">
-          <mat-option *ngFor="let item of carList" [value]="item.brand">
+    <form [formGroup]="form" (ngSubmit)="enregistrer()">
+      <div class="form-group">
+        <label for="marque">Marque</label>
+        <select  formControlName="marque" (change)="selectionMarque($event.target.value)" 
+        [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
+          <option *ngFor="let item of carList" [value]="item.brand">
             {{item.brand}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </option>
+        </select>
+        <div *ngIf="submitted && f.marque.errors" class="invalid-feedback">
+          <div *ngIf="f.marque.errors.required">La marque est requise</div>
+        </div>
+      </div>
 
-      <mat-form-field appearance="fill" *ngIf="modeleList != null">
-        <mat-label>Modèle</mat-label>
-        <mat-select (selectionChange)="selectionModele($event)">
-          <mat-option *ngFor="let item of modeleList.models" [value]="item">
+      <div class="form-group" *ngIf="modeleList != null">
+        <label for="modele">Modèle</label>
+        <select formControlName="modele" (change)="selectionModele($event.target.value)" 
+        [ngClass]="{ 'is-invalid': submitted && f.modele.errors }">
+          <option *ngFor="let item of modeleList.models" [value]="item">
             {{item}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          </option>
+        </select>
+        <div *ngIf="submitted && f.modele.errors" class="invalid-feedback">
+          <div *ngIf="f.modele.errors.required">Le modele est requise</div>
+        </div>
+      </div>
 
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Première immatriculation</mat-label>
-        <input [(ngModel)]="premiereImmat" name="premiereImmat" matInput type="date" placeholder="10-10-2020">
-      </mat-form-field>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Puissance fiscale</mat-label>
-        <input [(ngModel)]="puissanceFiscale" name="puissanceFiscale" matInput placeholder="5">
-      </mat-form-field>
+      <div class="form-group">
+        <label for="premiereImmat">Première immatriculation</label>
+        <input type="text" formControlName="premiereImmat" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.premiereImmat.errors }" />
+        <div *ngIf="submitted && f.premiereImmat.errors" class="invalid-feedback">
+          <div *ngIf="f.premiereImmat.errors.required">La première immatriculation est requise</div>
+        </div>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Prix d'achat</mat-label>
-        <input [(ngModel)]="prixAchat" name="prixAchat" matInput placeholder="10000">
-      </mat-form-field>
+      <div class="form-group">
+        <label for="puissanceFiscale">Puissance fiscale</label>
+        <input type="text" formControlName="puissanceFiscale" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.puissanceFiscale.errors }" />
+        <div *ngIf="submitted && f.puissanceFiscale.errors" class="invalid-feedback">
+          <div *ngIf="f.puissanceFiscale.errors.required">La puissance fiscale est requise</div>
+        </div>
+      </div>
 
-      <mat-form-field class="example-full-width">
-        <mat-label>Prix vente estimée</mat-label>
-        <input [(ngModel)]="prixVenteEstimee" name="prixVenteEstimee" matInput placeholder="15000">
-      </mat-form-field>
+      <div class="form-group">
+        <label for="prixAchat">Prix d'achat</label>
+        <input type="text" formControlName="prixAchat" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.prixAchat.errors }" />
+        <div *ngIf="submitted && f.prixAchat.errors" class="invalid-feedback">
+          <div *ngIf="f.prixAchat.errors.required">Le prix d'achat est requis</div>
+        </div>
+      </div>
 
+      <div class="form-group">
+        <label for="prixVenteEstimee">Prix vente estimée</label>
+        <input type="text" formControlName="prixVenteEstimee" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.prixVenteEstimee.errors }" />
+        <div *ngIf="submitted && f.prixVenteEstimee.errors" class="invalid-feedback">
+          <div *ngIf="f.prixVenteEstimee.errors.required">Le prix de vente estimée est requis</div>
+        </div>
+      </div>
 
+      <div class="form-group" id="bloc-boutons">
+        <button [disabled]="loading" class="btn btn-light">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Enregistrer le véhicule
+        </button>
+    </div>
     </form>
-    <a class="btn btn-light" (click)="enregistrer()">Enregistrer le véhicule</a>
-    
+
     <span *ngIf="voitureEnregistree"> Voiture enregistrée avec succès</span>
   </div>
 
@@ -57,7 +85,7 @@
         <a class="btn btn-light" [routerLink]="['/gestion/reparation', car.id]">Modifier</a>
         <a class="btn btn-danger" (click)="deleteCar(car.id)" color="warn">Supprimer</a>
       </li>
-     <span style="text-decoration: underline;"> {{ deleted }}</span>
+      <span style="text-decoration: underline;"> {{ deleted }}</span>
     </ul>
 
 
