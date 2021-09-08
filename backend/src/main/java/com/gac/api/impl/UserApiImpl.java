@@ -42,10 +42,13 @@ public class UserApiImpl implements UserApi {
 		log.info("Creation compte");
 		String result = userMetier.create(body);
 
-		if (result != null) {
-			return new ResponseEntity<>(HttpStatus.CREATED);
+		if (result == null) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		else if (result == "LOGIN_USED") {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	@Override

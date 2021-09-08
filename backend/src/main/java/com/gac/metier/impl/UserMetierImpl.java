@@ -2,6 +2,7 @@ package com.gac.metier.impl;
 
 import java.util.Optional;
 
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class UserMetierImpl implements UserMetier {
 	@Override
 	public String create(UserInfosDTO body) {
 		log.info("Création");
+		Optional <Users> u =  userDao.findByLogin(body.getLogin());
+
+		if (u.isPresent()) {
+			return "LOGIN_USED";
+		}
 		Users user = userMappeur.sourceToDestination(body);
 		Users usersaved = userDao.save(user);
 

@@ -65,7 +65,10 @@ export class ProfilFormComponent implements OnInit {
       this.loading = true;
       this.accountService.createUser(user).subscribe((response) => {
         this.loading = false;
-        if (response == StatusAccount.KO) {
+        if (response == StatusAccount.USEREXIST) {
+          this.message = "Ce nom d'utilisateur est déjà pris"
+        }
+        else if (response == StatusAccount.KO) {
           this.message = "Erreur sur la création de compte"
         }
         else {

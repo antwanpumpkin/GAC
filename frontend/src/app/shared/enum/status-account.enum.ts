@@ -1,4 +1,5 @@
 export enum StatusAccount {
     OK = 'OK',
-    KO = 'KO'
+    KO = 'KO',
+    USEREXIST = 'USEREXIST'
 }

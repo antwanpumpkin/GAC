@@ -27,7 +27,11 @@ export class AccountService {
       map((res: string) => {
         return StatusAccount.OK;
       }),
-      catchError(():Observable<string> => {
+      catchError((err):Observable<string> => {
+        console.log(err.status)
+        if (err.status == 409) {
+          return of(StatusAccount.USEREXIST);
+        }
         return of(StatusAccount.KO);
       })
     );
