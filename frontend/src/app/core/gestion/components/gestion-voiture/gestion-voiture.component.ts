@@ -35,7 +35,7 @@ export class GestionVoitureComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.f.marque.setValue("")
+    this.form.reset();
     this.http.get(this._jsonURL).subscribe(data =>{
       this.carList = data;
     })
@@ -97,6 +97,8 @@ export class GestionVoitureComponent implements OnInit {
       this.deleted = "";
       this.voitureEnregistree = true;
       this.getAllCars();
+      this.form.reset();
+      this.submitted = false;
     }, error => {
       this.voitureEnregistree = false;
       console.log(error);
