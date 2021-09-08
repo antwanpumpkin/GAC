@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
         })
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
         console.log(this.user)
         if (this.user != undefined || this.user != null) {
             console.log(this.user)
