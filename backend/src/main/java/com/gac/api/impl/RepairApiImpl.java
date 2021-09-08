@@ -37,7 +37,7 @@ public class RepairApiImpl implements RepairApi {
 
     @Override
     public ResponseEntity<List<RepairDTO>> getReparationByCarId(UUID carId) {
-        log.info("get all cars call for: " + carId);
+        log.info("get repairs for car: " + carId);
         return new ResponseEntity<List<RepairDTO>>(repairMetier.getRepairByCarId(carId), HttpStatus.OK);
     }
 

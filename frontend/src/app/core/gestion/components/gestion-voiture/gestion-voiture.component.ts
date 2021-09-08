@@ -4,6 +4,7 @@ import { VoitureImpl } from 'src/app/shared/models/voiture-impl';
 import { Car } from 'src/ws_contrat/target/generated-sources/gac/models/car';
 import { CarService } from 'src/ws_contrat/target/generated-sources/gac/services/car.service';
 import { GestionVoitureService } from 'src/app/shared/service/gestion.voiture.service';
+import { AuthGuard } from 'src/app/shared/service/auth-guard';
 
 @Component({
   selector: 'app-gestion-voiture',
@@ -29,7 +30,7 @@ export class GestionVoitureComponent implements OnInit {
   listAllCars: Array<Car>;
 
   constructor(private carService: CarService, private http: HttpClient, 
-    private gestionVoitureService: GestionVoitureService) {
+    private gestionVoitureService: GestionVoitureService, private authGuard: AuthGuard) {
     this.gestionVoitureService.getCarState().subscribe((value) => {
       console.log(value);
     })
@@ -80,7 +81,7 @@ export class GestionVoitureComponent implements OnInit {
     let date = new Date();
     
     this.voiture = new VoitureImpl();
-    this.voiture.userId = "00000000-0000-0000-0000-000000000001";
+    this.voiture.userId = this.authGuard.user.id;
     this.voiture.marque = this.brandSelected;
     this.voiture.modele = this.modeleSelected;
     this.voiture.premiereImmat = null//this.premiereImmat;

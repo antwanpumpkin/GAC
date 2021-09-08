@@ -5,6 +5,7 @@ import { Car } from 'src/ws_contrat/target/generated-sources/gac/models/car';
 import { map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { VOITURE_MOCK } from '../mock/voitureMock';
+import { AuthGuard } from './auth-guard';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GestionVoitureService {
   carState = new Subject<string>();
   voitureMock: Car = VOITURE_MOCK;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private authGuard: AuthGuard) { }
 
   getCarState(): Observable<string> {
     return this.carState.asObservable();
@@ -37,7 +38,7 @@ export class GestionVoitureService {
 
   getAllCars(): Observable<Car[]> {
     console.log("get all cars");
-    return this.carService.getCarsByUserId("00000000-0000-0000-0000-000000000001").pipe(
+    return this.carService.getCarsByUserId(this.authGuard.user.id).pipe(
       map((response:Car[]) => {
         return response;
       }),

@@ -12,12 +12,12 @@ import { UserInfos } from "src/ws_contrat/target/generated-sources/gac/models";
   providedIn: 'root'
 })
 export class AccountService {
-  user$ = new BehaviorSubject<AuthentificationImpl>(null);
+  user$ = new BehaviorSubject<UserInfosImpl>(null);
 
   constructor(private userService: UserService, private router: Router) {
     if (localStorage.getItem('user') !== undefined) {
       let jsonObj = JSON.parse(localStorage.getItem('user'));
-      let fObj = <AuthentificationImpl>jsonObj;
+      let fObj = <UserInfosImpl>jsonObj;
       this.user$.next(fObj)
     }
   }
@@ -37,7 +37,7 @@ export class AccountService {
     return this.userService.connexion(infos).pipe(
       map((res: UserInfosImpl) => {
         localStorage.setItem('user', JSON.stringify(res));
-        this.user$.next(infos);
+        this.user$.next(res);
         this.router.navigate(['/tableau-bord/accueil'])
         return StatusAccount.OK;
       }),

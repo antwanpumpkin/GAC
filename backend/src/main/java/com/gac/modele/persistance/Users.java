@@ -1,13 +1,12 @@
 package com.gac.modele.persistance;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -27,6 +26,13 @@ public class Users {
     
     @Column(name = "nom", nullable = false)
     private String nom;
+
+	@Column(name = "date")
+	@CreationTimestamp
+	private LocalDateTime date;
+
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<Car> cars;
 
 	public UUID getId() {
 		return id;
@@ -66,5 +72,22 @@ public class Users {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public void addCar(Car car){
+		cars.add(car);
+		car.setUsers(this);
+	}
+	public void removeCar(Car car){
+		cars.remove(car);
+		car.setUsers(null);
+	}
+
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
 	}
 }

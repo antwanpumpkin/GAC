@@ -1,6 +1,7 @@
 package com.gac.modele.persistance;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "car")
@@ -35,11 +37,16 @@ public class Car {
     @Column(name = "prixVenteEstimee")
     private Integer prixVenteEstimee;
     
-    @Column(name = "userId")
-    private UUID userId;
-
 	@OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Repair> repairs;
+
+	@ManyToOne
+	@JoinColumn(name = "users_id")
+	private Users users;
+
+	@Column(name = "date")
+	@CreationTimestamp
+	private LocalDateTime date;
 
 	public UUID getId() {
 		return id;
@@ -97,14 +104,6 @@ public class Car {
 		this.prixVenteEstimee = prixVenteEstimee;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
 	public void addRepair(Repair repair){
 		repairs.add(repair);
 		repair.setCar(this);
@@ -120,5 +119,13 @@ public class Car {
 
 	public void setRepairs(Set<Repair> repairs) {
 		this.repairs = repairs;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 }

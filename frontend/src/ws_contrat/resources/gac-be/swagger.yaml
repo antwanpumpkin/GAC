@@ -350,6 +350,10 @@ definitions:
       nom:
         type: "string"
         example: "Martin"
+      id:
+        type: "string"
+        format: "uuid"
+        example: "0000-0000"
   Repair:
     type: "object"
     properties:

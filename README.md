@@ -9,8 +9,7 @@ Gérer erreur accès à /gestion non connecté
 Gérer erreur enregister véhicule vide
 Gérer modifier véhicule enregistré
 Force du mot de passe
-Delete cascade voiture + reparations
-Mettre toute les variables en anglais
+Ajouter vrai id user dans voiture
 
 Renseigner les réparations effectuées, et celles à faire
 s'en suit une estimation de l'état de la voiture (upload la facture pour valider la réparation)

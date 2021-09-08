@@ -57,8 +57,7 @@ public class RepairMetierImpl implements RepairMetier {
 		if (car.isPresent()) {
 			car.get().addRepair(reparation);
 			carDao.save(car.get());
-			//retourner id reparation
-			return "OK";
+			return repairDao.findTop1ByCarIdOrderByDateDesc(body.getVoitureId()).getId().toString();
 		}
 		return null;
 	}

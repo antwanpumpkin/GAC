@@ -1,6 +1,9 @@
 package com.gac.modele.persistance;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +22,10 @@ public class Repair {
 
     @Column(name = "facture", nullable = false)
     private Boolean facture;
+
+    @Column(name = "date")
+    @CreationTimestamp
+    private LocalDateTime date;
 
     public UUID getId() {
         return id;
