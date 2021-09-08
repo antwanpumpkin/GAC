@@ -24,7 +24,6 @@ export class GestionVoitureComponent implements OnInit {
   prixVenteEstimee = null;
   voiture : VoitureImpl;
   voitureEnregistree = false;
-  idRegistered : string;
   deleted: string;
 
   listAllCars: Array<Car>;
@@ -43,11 +42,6 @@ export class GestionVoitureComponent implements OnInit {
     this.getAllCars();
   }
 
-  getCar() {
-    this.gestionVoitureService.getCar(this.idRegistered).subscribe((res) => {
-      console.log(res);
-    })
-  }
 
   getAllCars() {
     this.gestionVoitureService.getAllCars().subscribe((res) => {
@@ -90,10 +84,8 @@ export class GestionVoitureComponent implements OnInit {
     this.voiture.puissanceFiscale = this.puissanceFiscale;
 
     console.log(this.voiture);
-    this.carService.addCar(this.voiture).subscribe((response) => {
+    this.carService.addCar(this.voiture).subscribe(() => {
       this.voitureEnregistree = true;
-      this.idRegistered = response.replace(/\"/g,"");
-      console.log(this.idRegistered);
       this.getAllCars();
     }, error => {
       this.voitureEnregistree = false;

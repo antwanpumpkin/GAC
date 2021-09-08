@@ -44,8 +44,11 @@ export class GestionVoitureService {
       }),
       catchError((): Observable<Car[]> => {
         console.log('error');
-        const array = new Array<Car>(this.voitureMock);
-        return of(array);
+        if (this.authGuard.mock) {
+          const array = new Array<Car>(this.voitureMock);
+          return of(array);
+        }
+        return of(null)
       }))
     }
 }

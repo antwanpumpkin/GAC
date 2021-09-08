@@ -9,6 +9,7 @@ import { AccountService } from "./account-service";
 })
 export class AuthGuard implements CanActivate {
     user: UserInfosImpl;
+    mock = false;
 
     constructor(private accountService: AccountService) {
         this.user = undefined;

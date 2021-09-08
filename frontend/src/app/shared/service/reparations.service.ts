@@ -23,7 +23,7 @@ export class ReparationsService {
   }
 
   getAllRepairs(id: string):Observable<Repair[]> {
-    return this.repairService.getReparationByCarId(id).pipe(
+    return this.repairService.getRepairByCarId(id).pipe(
       map((res: Repair[]) => {
         return res;
       }),

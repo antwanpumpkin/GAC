@@ -38,12 +38,8 @@ paths:
           schema:
             $ref: "#/definitions/Car"
       responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: string
-            format: uuid
-            example: "40bad878-badf-4601-a729-e0dea0c7cc16"
+        "201":
+          description: "voiture ajoutée"
         "405":
           description: "Invalid input"
   /car/{carId}:
@@ -185,11 +181,8 @@ paths:
           schema:
             $ref: "#/definitions/UserInfos"
       responses:
-        "200":
-          description: "user connected"
-          schema:
-            type: string
-            example: "OK"
+        "201":
+          description: "user created"
         "404":
           description: "User not found"
   /user/modification:
@@ -235,11 +228,8 @@ paths:
           schema:
             $ref: "#/definitions/Repair"
       responses:
-        "200":
+        "201":
           description: "Réparation ajoutée"
-          schema:
-            type: string
-            example: "OK"
         "404":
           description: "Réparation KO"
   /repair/{reparationId}:
@@ -274,7 +264,7 @@ paths:
         - "repair"
       summary: "Trouver toute les réparations d'une voiture"
       description: "Returns all repairs"
-      operationId: "getReparationByCarId"
+      operationId: "getRepairByCarId"
       produces:
         - "application/json"
       responses:

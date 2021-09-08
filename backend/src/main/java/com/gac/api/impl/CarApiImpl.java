@@ -28,38 +28,60 @@ public class CarApiImpl implements CarApi {
 	CarMetier carMetier;
 	
 	@Override
-	public ResponseEntity<UUID> addCar(@Valid CarDTO body) {
+	public ResponseEntity<Void> addCar(@Valid CarDTO body) {
 		log.info("add car call");
 		UUID result = carMetier.addCar(body);
-		log.info("car added: " + result);
-		return new ResponseEntity<UUID>(result, HttpStatus.OK);		
+
+		if (result != null) {
+			log.info("car added: " + result);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
 	public ResponseEntity<String> deleteCar(UUID carId) {
 		log.info("delete car call");
 		String result = carMetier.deleteCar(carId);
-		log.info("car deleted: " + result);
-		return new ResponseEntity<String>(result, HttpStatus.OK);
+
+		if (result != null) {
+			log.info("car deleted: " + result);
+			return new ResponseEntity<String>(result, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
 	public ResponseEntity<CarDTO> getCarById(UUID carId) {
 		log.info("get car call: " + carId);
-		return new ResponseEntity<CarDTO>(carMetier.getCarById(carId), HttpStatus.OK);
+
+		CarDTO car = carMetier.getCarById(carId);
+		if (car != null) {
+			return new ResponseEntity<CarDTO>(car, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 
 	@Override
 	public ResponseEntity<CarDTO> updateCar(UUID carId, @Valid CarDTO params) {
 		log.info("update car call");
 		CarDTO result = carMetier.updateCar(carId, params);
-		log.info("car updated: " + result);
-		return new ResponseEntity<CarDTO>(result, HttpStatus.OK);
+
+		if (result != null) {
+			log.info("car updated: " + result);
+			return new ResponseEntity<CarDTO>(result, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
 	public ResponseEntity<List<CarDTO>> getCarsByUserId(UUID userId) {
 		log.info("get all cars call for: " + userId);
-		return new ResponseEntity<List<CarDTO>>(carMetier.getCarsByUserId(userId), HttpStatus.OK);
+		List<CarDTO> cars = carMetier.getCarsByUserId(userId);
+
+		if (cars != null) {
+			return new ResponseEntity<List<CarDTO>>(cars, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }

@@ -13,6 +13,7 @@ import com.gac.layer.dao.UserDao;
 import com.gac.metier.CarMetier;
 import com.gac.modele.persistance.Car;
 import com.gac.modele.persistance.Users;
+import kotlin.OptIn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,11 @@ public class CarMetierImpl implements CarMetier {
 		
 		if (voiture.isPresent()) {
 			carDao.delete(voiture.get());
-			return "car deleted";
+
+			Optional<Car> deletedCar = carDao.findById(carId);
+			if (!deletedCar.isPresent()) {
+				return "car deleted";
+			}
 		}
 		return null;
 	}

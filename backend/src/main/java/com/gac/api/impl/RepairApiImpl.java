@@ -29,25 +29,31 @@ public class RepairApiImpl implements RepairApi {
         log.info("delete repair call");
         String result = repairMetier.deleteRepair(repairId);
         if (result != null) {
-        log.info("repair deleted: " + result);
-        return new ResponseEntity<String>(result, HttpStatus.OK);
+            log.info("repair deleted: " + result);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
-    public ResponseEntity<List<RepairDTO>> getReparationByCarId(UUID carId) {
+    public ResponseEntity<List<RepairDTO>> getRepairByCarId(UUID carId) {
         log.info("get repairs for car: " + carId);
-        return new ResponseEntity<List<RepairDTO>>(repairMetier.getRepairByCarId(carId), HttpStatus.OK);
+        List<RepairDTO> repairs = repairMetier.getRepairByCarId(carId);
+
+        if (repairs != null) {
+            return new ResponseEntity<List<RepairDTO>>(repairs, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @Override
-    public ResponseEntity<String> addRepair(RepairDTO body) {
+    public ResponseEntity<Void> addRepair(RepairDTO body) {
         log.info("Creation reparation");
         String result = repairMetier.addRepair(body);
 
         if (result != null) {
-            return new ResponseEntity<String>(result, HttpStatus.CREATED);
+            log.info("repair added: " + result);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
