@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { UserInfosImpl } from "../models/user-infos-impl";
 import { AccountService } from "./account-service";
@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     user: UserInfosImpl;
     mock = false;
 
-    constructor(private accountService: AccountService) {
+    constructor(private accountService: AccountService, private router: Router) {
         this.user = undefined;
         this.accountService.user$.subscribe((user) => {
             console.log("Update user:" + JSON.stringify(user))
@@ -19,12 +19,12 @@ export class AuthGuard implements CanActivate {
         })
     }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         console.log(this.user)
         if (this.user != undefined || this.user != null) {
             console.log(this.user)
             return true;
         }
-        return false;
+        return this.router.parseUrl('/');
     }
 }
