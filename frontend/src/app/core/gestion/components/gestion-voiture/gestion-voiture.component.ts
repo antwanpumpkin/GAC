@@ -16,7 +16,7 @@ import { FormGroup } from '@angular/forms';
 export class GestionVoitureComponent implements OnInit {
   carList: any;
   modeleList: any;
-  private _jsonURL = 'assets/carlist.json';
+  private _jsonURL = 'assets/json/carlist.json';
 
   form: FormGroup;
   voiture : VoitureImpl;
@@ -36,6 +36,7 @@ export class GestionVoitureComponent implements OnInit {
 
   ngOnInit() {
     this.form.reset();
+    this.modeleList = null;
     this.http.get(this._jsonURL).subscribe(data =>{
       this.carList = data;
     })
@@ -98,6 +99,7 @@ export class GestionVoitureComponent implements OnInit {
       this.voitureEnregistree = true;
       this.getAllCars();
       this.form.reset();
+      this.modeleList = null;
       this.submitted = false;
     }, error => {
       this.voitureEnregistree = false;

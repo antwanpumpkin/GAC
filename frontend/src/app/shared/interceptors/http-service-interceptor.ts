@@ -18,7 +18,7 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url != "assets/carlist.json" && req.url != "assets/reparations.json") {
+        if (req.url != "assets/json/carlist.json" && req.url != "assets/json/reparations.json") {
             console.log(req);
             const header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
             return next.handle(

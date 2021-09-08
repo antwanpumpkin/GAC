@@ -1,31 +1,62 @@
 <div class="parent">
-    <div class="left-side">
-        <form class="example-form">
+  <div class="left-side">
+    <form [formGroup]="form" (ngSubmit)="ajoutReparation()">
 
-            <mat-form-field appearance="fill" class="marque">
-                <mat-label>Secteur</mat-label>
-                <mat-select (selectionChange)="selectionSecteur($event)">
-                    <mat-option *ngFor="let item of secteurList" [value]="item.secteur">
-                        {{item.secteur}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+      <ng-container *ngIf="modeAvancee">
+        <div class="form-group">
+          <label for="marque">Secteur</label>
+          <select (change)="selectionSecteur($event.target.value)"
+            [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
+            <option *ngFor="let item of secteurList" [value]="item.secteur">
+              {{item.secteur}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.marque.errors" class="invalid-feedback">
+            <div *ngIf="f.marque.errors.required">La marque est requise</div>
+          </div>
+        </div>
 
-            <mat-form-field appearance="fill" *ngIf="secteurSelected != null">
-                <mat-label>Réparation</mat-label>
-                <mat-select (selectionChange)="selectionReparation($event)">
-                  <mat-option *ngFor="let item of reparationList.piece" [value]="item">
-                    {{item}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-        </form>
-        <a disabled>Ajouter une facture</a>
-        <br>
-        <a class="btn btn-light" (click)="ajoutReparation()" [ngClass]="{ 'disabled': !reparationSelected}" >Ajouter la réparation</a>
-    </div>
+        <div class="form-group" *ngIf="secteurSelected != null">
+          <label for="type">Réparation</label>
+          <select formControlName="type"
+            [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+            <option *ngFor="let item of reparationList.piece" [value]="item">
+              {{item}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+            <div *ngIf="f.type.errors.required">La réparation est requise</div>
+          </div>
+        </div>
+      </ng-container>
 
-    
+        <div class="form-group" *ngIf="!modeAvancee">
+          <label for="type">Réparation</label>
+          <select formControlName="type"
+            [ngClass]="{ 'is-invalid': submitted && f.type.errors }">
+            <option *ngFor="let item of type_revision" [value]="item">
+              {{item}}
+            </option>
+          </select>
+          <div *ngIf="submitted && f.type.errors" class="invalid-feedback">
+            <div *ngIf="f.type.errors.required">La réparation est requise</div>
+          </div>
+        </div>
+
+      <a (click)="changementMode()">
+        <span *ngIf="modeAvancee">Désactiver</span>
+        <span *ngIf="!modeAvancee">Activer</span>
+        mode Avancée</a>
+      <br />
+      <a disabled>Ajouter une facture</a>
+      <br>
+      <button [ngClass]="{ 'disabled': !f.type.value}" class="btn btn-light">
+        Ajouter la réparation
+      </button>
+    </form>
+  </div>
+
+
   <div class="right-side">
     <h3>Réparations effectuées:</h3>
     <ul>
@@ -33,7 +64,7 @@
         <span>{{ repair.type }} </span>
         <a class="btn btn-danger" (click)="deleteRepair(repair.id)" color="warn">Supprimer</a>
       </li>
-     <span style="text-decoration: underline;"> {{ deleted }}</span>
+      <span style="text-decoration: underline;"> {{ deleted }}</span>
     </ul>
 
 

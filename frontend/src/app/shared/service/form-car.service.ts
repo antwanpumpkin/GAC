@@ -12,9 +12,9 @@ export class FormCarService {
         marque: ['', [Validators.required]],
         modele: ['', [Validators.required]],
         premiereImmat: ['', [Validators.required]],
-        puissanceFiscale: ['', [Validators.required]],
-        prixAchat: ['', [Validators.required]],
-        prixVenteEstimee: ['', [Validators.required]],
+        puissanceFiscale: ['', [Validators.required, Validators.pattern("^[0-9]*$"),]],
+        prixAchat: ['', [Validators.required, Validators.pattern("^[0-9]*$"),]],
+        prixVenteEstimee: ['', [Validators.required, Validators.pattern("^[0-9]*$"),]],
       })
     }
 }
