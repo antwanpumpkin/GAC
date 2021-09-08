@@ -51,6 +51,7 @@ export class GestionVoitureComponent implements OnInit {
   }
 
   deleteCar(id: any) {
+    this.voitureEnregistree = false;
     console.log("demande suppresion voiture avec id: " + id);
     this.carService.deleteCar(id).subscribe((response: string) => {
       console.log(response);
@@ -85,6 +86,7 @@ export class GestionVoitureComponent implements OnInit {
 
     console.log(this.voiture);
     this.carService.addCar(this.voiture).subscribe(() => {
+      this.deleted = "";
       this.voitureEnregistree = true;
       this.getAllCars();
     }, error => {
@@ -94,8 +96,5 @@ export class GestionVoitureComponent implements OnInit {
   }
 
   modifier() {
-
   }
-
-
 }
