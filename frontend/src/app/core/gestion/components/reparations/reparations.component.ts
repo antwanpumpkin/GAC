@@ -16,7 +16,6 @@ export class ReparationsComponent implements OnInit {
   form: FormGroup
   secteurList: any;
   reparationList: any;
-  secteurSelected = null;  
   listDoneRepairs: Array<Repair>;
   deleted: string;
   modeAvancee = false;
@@ -30,6 +29,8 @@ export class ReparationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formRepairService.form;
+    this.form.reset();
+    this.reparationList = null;
     this.http.get(this._jsonURL).subscribe(data =>{
       this.secteurList = data;
     })
@@ -44,7 +45,6 @@ export class ReparationsComponent implements OnInit {
   }
 
   selectionSecteur(event: any) {
-    this.secteurSelected = event
     this.reparationList = this.secteurList.filter(list => list.secteur == event)[0];
     console.log(this.reparationList)
   }
@@ -58,10 +58,9 @@ export class ReparationsComponent implements OnInit {
 
     console.log(this.f.type.value)
     this.reparationService.postRepair(repair).subscribe((res) => {
-      console.log(res);
       this.form.reset();
       this.deleted = "";
-      this.secteurSelected = null;
+      this.reparationList = null;
       this.submitted = false;
       this.getReparations();
     })
