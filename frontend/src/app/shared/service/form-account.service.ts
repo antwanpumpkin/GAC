@@ -9,10 +9,10 @@ export class FormAccountService {
 
   constructor(private formBuilder: FormBuilder) { 
     this.form = this.formBuilder.group({
-      prenom: ['', Validators.required],
-      nom: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(6)]
+      prenom: ['', [Validators.required]],
+      nom: ['', [Validators.required]],
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     })
   }
 }

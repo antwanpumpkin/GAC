@@ -28,7 +28,6 @@ export class AccountService {
         return StatusAccount.OK;
       }),
       catchError((err):Observable<string> => {
-        console.log(err.status)
         if (err.status == 409) {
           return of(StatusAccount.USEREXIST);
         }
