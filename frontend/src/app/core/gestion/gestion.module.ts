@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GestionRoutingModule } from './gestion-routing.module';
 import { ReparationInterfaceComponent } from './container/reparation-interface/reparation-interface.component';
 import { ReparationsComponent } from './components/reparations/reparations.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [GestionVoitureComponent, GestionInterfaceComponent, ReparationsComponent, ReparationInterfaceComponent],
@@ -21,7 +22,8 @@ import { ReparationsComponent } from './components/reparations/reparations.compo
     MatSelectModule,
     FormsModule,
     GestionRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   exports: [
     MatButtonModule,

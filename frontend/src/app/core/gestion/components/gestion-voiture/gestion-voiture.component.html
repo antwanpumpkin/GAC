@@ -40,7 +40,7 @@
 
       <div class="form-group">
         <label for="puissanceFiscale">Puissance fiscale</label>
-        <input type="text" formControlName="puissanceFiscale" class="form-control"
+        <input type="text" onlyNumber formControlName="puissanceFiscale" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.puissanceFiscale.errors }" />
         <div *ngIf="submitted && f.puissanceFiscale.errors" class="invalid-feedback">
           <div *ngIf="f.puissanceFiscale.errors.required">La puissance fiscale est requise</div>
@@ -49,7 +49,7 @@
 
       <div class="form-group">
         <label for="prixAchat">Prix d'achat</label>
-        <input type="text" formControlName="prixAchat" class="form-control"
+        <input type="text" onlyNumber formControlName="prixAchat" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.prixAchat.errors }" />
         <div *ngIf="submitted && f.prixAchat.errors" class="invalid-feedback">
           <div *ngIf="f.prixAchat.errors.required">Le prix d'achat est requis</div>
@@ -58,7 +58,7 @@
 
       <div class="form-group">
         <label for="prixVenteEstimee">Prix vente estimée</label>
-        <input type="text" formControlName="prixVenteEstimee" class="form-control"
+        <input type="text" onlyNumber formControlName="prixVenteEstimee" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && f.prixVenteEstimee.errors }" />
         <div *ngIf="submitted && f.prixVenteEstimee.errors" class="invalid-feedback">
           <div *ngIf="f.prixVenteEstimee.errors.required">Le prix de vente estimée est requis</div>
