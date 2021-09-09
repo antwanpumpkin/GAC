@@ -204,10 +204,9 @@ paths:
             $ref: "#/definitions/UserInfos"
       responses:
         "200":
-          description: "user modified"
+          description: "user connected"
           schema:
-            type: string
-            example: "OK"
+            $ref: "#/definitions/UserInfos"
         "404":
           description: "User not found"
   /repair:

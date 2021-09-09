@@ -52,12 +52,12 @@ public class UserApiImpl implements UserApi {
 	}
 
 	@Override
-	public ResponseEntity<String> modification(@Valid UserInfosDTO body) {
+	public ResponseEntity<UserInfosDTO> modification(@Valid UserInfosDTO body) {
 		log.info("Modification compte");
-		String result = userMetier.modification(body);
+		UserInfosDTO result = userMetier.modification(body);
 
 		if (result != null) {
-			return new ResponseEntity<String>(result, HttpStatus.OK);
+			return new ResponseEntity<UserInfosDTO>(result, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}

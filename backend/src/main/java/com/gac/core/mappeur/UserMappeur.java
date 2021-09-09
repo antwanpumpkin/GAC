@@ -14,7 +14,7 @@ public interface UserMappeur {
 	UserInfosDTO destinationTosource(Users user);
 
 	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-	void updateCustomerFromDto(UserInfosDTO dto, @MappingTarget Users entity);
+	void updateUserFromDto(UserInfosDTO dto, @MappingTarget Users entity);
 
 }
 

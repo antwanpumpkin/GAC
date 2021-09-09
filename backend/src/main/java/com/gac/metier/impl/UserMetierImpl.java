@@ -53,14 +53,14 @@ public class UserMetierImpl implements UserMetier {
 	}
 
 	@Override
-	public String modification(UserInfosDTO body) {
+	public UserInfosDTO modification(UserInfosDTO body) {
 		log.info("Modification");
 		Optional<Users> user = userDao.findByLogin(body.getLogin());
 
 		if (user.isPresent()) {
 			log.info(user.get().getLogin());
-			userMappeur.updateCustomerFromDto(body, user.get());
-			return userDao.save(user.get()).getLogin();
+			userMappeur.updateUserFromDto(body, user.get());
+			return userMappeur.destinationTosource(userDao.save(user.get()));
 		}
 		return null;
 	}

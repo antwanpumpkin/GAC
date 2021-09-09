@@ -52,9 +52,9 @@ export class AccountService {
 
   modificationProfil(user: UserInfosImpl): Observable<string> {
     return this.userService.modification(user).pipe(
-      map((res: string) => {
-        localStorage.setItem('user', JSON.stringify(user));
-        this.user$.next(user);
+      map((res: UserInfosImpl) => {
+        localStorage.setItem('user', JSON.stringify(res));
+        this.user$.next(res);
         return StatusAccount.OK;
       }),
       catchError(():Observable<string> => {
