@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +25,9 @@ public class JwtUserDetailsService implements UserDetailsService {
         Optional<Users> user = userDao.findByLogin(username);
 
         if (user.isPresent()) {
-            return new User(user.get().getLogin(), user.get().getPassword(),
+            //chiffrer le password depuis front
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            return new User(user.get().getLogin(), encoder.encode(user.get().getPassword()),
                     new ArrayList<>());
         } else {
             throw new UsernameNotFoundException("User not found with username: " + username);

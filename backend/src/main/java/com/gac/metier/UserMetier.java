@@ -8,5 +8,5 @@ public interface UserMetier {
 	public UserInfosDTO connexion(AuthentificationDTO body);
 	public String create(UserInfosDTO body);
 	public UserInfosDTO modification(UserInfosDTO body);
-	public void authenticate(String username, String password) throws Exception;
+	public UserInfosDTO authenticate(String username, String password) throws Exception;
 }

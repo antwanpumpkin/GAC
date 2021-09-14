@@ -72,9 +72,12 @@ public class UserMetierImpl implements UserMetier {
 		return null;
 	}
 
-	public void authenticate(String username, String password) throws Exception {
+	public UserInfosDTO authenticate(String username, String password) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			Optional<Users> user = userDao.findByLoginAndPassword(username,	password);
+			UserInfosDTO userDTO = userMappeur.destinationTosource(user.get());
+			return userDTO;
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {

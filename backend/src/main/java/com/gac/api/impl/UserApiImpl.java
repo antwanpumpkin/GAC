@@ -49,24 +49,26 @@ public class UserApiImpl implements UserApi {
 	@Override
 	public ResponseEntity<UserInfosDTO> connexion(@Valid AuthentificationDTO body) {
 		log.info("connexion");
-		UserInfosDTO result = userMetier.connexion(body);
+		UserInfosDTO result;
+		/*UserInfosDTO result = userMetier.connexion(body);
 
 		if (result == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+		}*/
 		//return new ResponseEntity<UserInfosDTO>(result, HttpStatus.OK);
 		try {
-			userMetier.authenticate(body.getLogin(), body.getPassword());
+			result = userMetier.authenticate(body.getLogin(), body.getPassword());
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(body.getLogin());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		result.setToken(token);
 		log.info(new JwtResponse(token).getToken());
-		//return ResponseEntity.ok(new JwtResponse(token));
 		return new ResponseEntity<UserInfosDTO>(result, HttpStatus.OK);
 	}
 

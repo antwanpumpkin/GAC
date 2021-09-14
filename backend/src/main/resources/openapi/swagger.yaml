@@ -343,6 +343,9 @@ definitions:
         type: "string"
         format: "uuid"
         example: "0000-0000"
+      token:
+        type: "string"
+        example: "ertrrhrhr"
   Repair:
     type: "object"
     properties:
