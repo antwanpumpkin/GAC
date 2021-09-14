@@ -83,6 +83,7 @@ export class ReparationsComponent implements OnInit {
   }
 
   changementMode() {
-    this.modeAvancee = !this.modeAvancee
+    this.modeAvancee = !this.modeAvancee;
+    this.f.type.setValue(null);
   }
 }
