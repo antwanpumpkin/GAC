@@ -23,7 +23,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = {
                 "com.gac.api.impl",
                 "com.gac.metier.impl",
-                "com.gac.core.mappeur"
+                "com.gac.core.mappeur",
+                "com.gac.service"
 })
 //@PropertySource("classpath:technical.properties") // chargement des propriétés techniques/
 @EntityScan(basePackages = {"com.gac.modele.persistance"})
