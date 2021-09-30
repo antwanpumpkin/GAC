@@ -26,7 +26,7 @@ export class HttpServiceInterceptor implements HttpInterceptor {
                 req.clone({
                     url: environment.urlBe + req.url,
                     setHeaders:  {
-                        'Access-Control-Allow-Origin': '*', 
+                        'Access-Control-Allow-Origin': '*',
                         'Authorization': `Bearer ${token}`,
                         'Content-Type' : 'application/json;',
                         'Accept'       : 'application/json',
@@ -49,7 +49,7 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     }
 
     private handleAuthError(err: HttpErrorResponse): Observable < any > {
-    console.log(err);
-    throw err;
-}
+        console.log(err);
+        throw err;
+    }
 }
