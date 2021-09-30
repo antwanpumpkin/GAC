@@ -3,13 +3,13 @@ import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { AuthGuard } from '../service/auth-guard';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HttpServiceInterceptor implements HttpInterceptor {
-    constructor(
-    ) {
+    constructor(private authGuard: AuthGuard) {
         this.initInterceptor();
     }
 
@@ -20,11 +20,17 @@ export class HttpServiceInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (req.url != "assets/json/carlist.json" && req.url != "assets/json/reparations.json") {
             console.log(req);
-            const header = new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+            const token = this.authGuard.user?.token || '';
+            console.log(token);
             return next.handle(
                 req.clone({
                     url: environment.urlBe + req.url,
-                    headers: header
+                    setHeaders:  {
+                        'Access-Control-Allow-Origin': '*', 
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type' : 'application/json;',
+                        'Accept'       : 'application/json',
+                      },
                 }))
                 .pipe(
                     catchError((error: HttpErrorResponse) => {

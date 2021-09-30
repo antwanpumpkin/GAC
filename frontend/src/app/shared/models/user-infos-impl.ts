@@ -6,4 +6,5 @@ export class UserInfosImpl implements UserInfos {
     password: string;
     prenom: string;
     id: string;
+    token: string;
 }
